@@ -1,2 +1,5 @@
 #!/bin/sh
+# Begin CUPS service run file
+exec 2>&1
 exec /usr/sbin/cupsd -f
+# End of CUPS service run file

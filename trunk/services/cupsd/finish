@@ -1,0 +1,4 @@
+#!/bin/sh
+# Stop the printer daemon.
+/bin/killall -q /usr/sbin/cupsd
+# End /etc/sv/cups/finish

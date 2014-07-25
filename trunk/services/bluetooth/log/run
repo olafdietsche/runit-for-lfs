@@ -1,0 +1,4 @@
+#!/bin/sh
+# Begin bluetooth log service file
+exec /usr/sbin/svlogd -tt /var/log/bluetooth
+# End of bluetooth log service run file

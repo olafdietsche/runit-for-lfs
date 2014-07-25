@@ -1,0 +1,5 @@
+#!/bin/sh
+#Begin atd log service file
+exec /usr/sbin/svlogd -tt /var/log/atd
+#End of atd log service run file
+

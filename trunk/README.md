@@ -1,13 +1,28 @@
-## Runit init scripts for Linux From Scratch
+Runit init scripts for Linux From Scratch
 
-This repository contains the runit init scripts for the Linux From Scratch distribution.
+This repository contains the runit init scripts for
+the Linux From Scratch distribution.
 
-Updates to this may be acquired from the LFS-for-Runit project at http://www.linuxquestions.org/questions/linux-from-scratch-13/runit-for-lfs-official-bundle-release-4175511869/ or from the LinuxFromScratch Hints repository.
+Updates to this may be acquired from the LFS-for-Runit
+project at:
 
-This is loosely based on https://github.com/voidlinux/runit-void with several reworkings
-for Linux From Scratch, and extended handlers for lsb and sysv legacy bootscripts.
+http://www.linuxquestions.org/questions/linux-from-scratch-13/runit-for-lfs-official-bundle-release-4175511869/
 
-### How to use it
+this SVN repository at:
+
+https://code.google.com/p/runit-for-lfs/
+
+or from the LinuxFromScratch Hints repository:
+
+http://linuxfromscratch.org/hints/downloads/files/
+
+This is loosely based on:
+
+https://github.com/voidlinux/runit-void
+
+with several reworkings for Linux From Scratch.
+
+How to use it
 
 First install the bootscripts and services using the Makefile provided.
 

@@ -1,3 +1,11 @@
 #!/bin/sh
-[ ! -d /run/dbus ] && install -m755 -g 18 -o 18 -d /run/dbus
-exec dbus-daemon --system --nofork --nopidfile
+# Begin D-Bus Messagebus service run file
+exec 2>&1
+if [ ! -d /var/run/dbus ]; then
+  mkdir -p /var/run/dbus
+  chown messagebus /var/run/dbus
+  chgrp messagebus /var/run/dbus
+fi
+/usr/bin/dbus-uuidgen --ensure
+exec dbus-daemon --nofork --nopidfile --config-file=/etc/dbus-1/system.conf
+# End of D-Bus Messagebus service run file

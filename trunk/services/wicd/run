@@ -1,0 +1,3 @@
+#!/bin/sh
+sv check dbus eth0 >/dev/null || exit 1
+exec /usr/sbin/wicd --no-daemon

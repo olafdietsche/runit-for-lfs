@@ -1,0 +1,5 @@
+#!/bin/sh
+# Begin fcron service finish file
+kill -9 $(pidof fcron)
+rm -f /run/fcron.*
+# End of fcron service finish file

@@ -1,0 +1,28 @@
+[ ] - Create directory check and creation triggers for logging run files. For the initial
+      system we used a script to auto-create the directories upon install. This could also
+      be done via the Makefile.
+[ ] - Create/Import run service files for the following services:
+          [ ] - saslauthd
+          [ ] - nfs-client
+          [ ] - nfs-server
+          [ ] - slapd
+          [ ] - dovecot
+          [ ] - heimdal
+          [ ] - krb5
+          [ ] - netfs
+          [ ] - dhcpd
+          [ ] - rsyncd
+          [ ] - vsftpd
+          [ ] - networkmanager
+          [ ] - svn
+          [ ] - sendmail
+          [ ] - qpopper
+          [ ] - swat
+          [ ] - virtuoso
+          [ ] - soprano
+          [ ] - winbindd
+          [ ] - stunnel
+[ ] - Clean up pid files to move system services into dedicated pipes.
+[ ] - Create/Import any service run files not in forementioned list that could be useful
+      by BLFS.
+[ ] - Clean up Makefile as/if necessary.

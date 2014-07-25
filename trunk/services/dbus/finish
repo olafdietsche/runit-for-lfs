@@ -1,0 +1,5 @@
+#!/bin/sh
+# Stop the Messagebus
+/bin/killall -q /usr/bin/dbus-daemon
+rm -rf /run/dbus/system_bus_socket /run/dbus/pid
+# End of Messagebus finish file

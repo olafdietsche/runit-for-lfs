@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/sbin/smartd -n  -p /run/smartd.pid  -q never 2>&1

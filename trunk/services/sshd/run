@@ -1,3 +1,8 @@
 #!/bin/sh
-/usr/bin/ssh-keygen -A # Will generate host keys if they don't already exist
-exec /usr/sbin/sshd -D
+
+# sshd will crash if you use the BLFS example to create
+# the keys. Let the Runit run file create them for you.
+
+/usr/bin/ssh-keygen -A
+
+exec /usr/sbin/sshd -D 2>&1

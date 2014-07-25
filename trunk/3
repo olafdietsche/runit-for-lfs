@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# Linux From Scratch Runit Stage 3 Bootscript.
+# Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
+# Work derived from VoidLinux and Ignite and adapted for LFS.
+
+PATH=/usr/bin:/usr/sbin
+
+# First re-read the configuration to see if any special parameters are needed.
+. /etc/runit.conf
+
+# If rebooting, send the reboot command and execute the reboot file.
+if [ -e /run/runit/reboot ]; then
+    touch /etc/runit/reboot
+    chmod 100 /etc/runit/reboot
+fi
+
+# This stops the services, and brings down all the services in 15 seconds. Normally
+# Runit uses a few minutes to bring down services, but unless totally necessary, the
+# system can be brought down very quickly in under 15 seconds. We'll use 10 as default.
+echo "Waiting for services to stop..."
+sv -w10 force-stop /var/service/*
+sv exit /var/service/*
+
+# Load the emergency superuser shell just case a failure arises.
+stty onlcr
+
+# This saves the entropy file.
+echo "Saving random seed..."
+dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1
+
+
+# Save the hardware and system clocks.
+if [ -n "$HARDWARECLOCK" ]; then
+    hwclock --systohc ${HARDWARECLOCK:+--$(echo $HARDWARECLOCK |tr A-Z a-z)}
+fi
+
+# Send the halt signal.
+halt -w # for utmp
+
+# Stop udev and bring down all devices.
+echo "Stopping udev..."
+udevadm control --exit
+
+# Stop any remaining processes and core services.
+echo "Sending TERM signal to processes..."
+pkill --inverse -s0,1 -TERM
+sleep 5
+echo "Sending KILL signal to processes..."
+pkill --inverse -s0,1 -KILL
+
+# Unmount the local file systems.
+echo "Unmounting filesystems, disabling swap..."
+umount /tmp
+swapoff -a
+umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
+
+# Remoun the root file system in read-only.
+echo "Remounting rootfs read-only..."
+mount -o remount,ro /
+
+# Shutdown the system.
+sleep 1
+sync

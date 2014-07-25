@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Linux From Scratch Runit Stage 2 Bootscript.
+# Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
+# Work derived from VoidLinux and Ignite and adapted for LFS.
+
+PATH=/usr/bin:/usr/sbin
+
+# This will set the default runlevel similar to how sysv uses inittab.
+# Posible values for this system include:
+#	runlevel=single : Used for emergency purposes only and administrative modes.
+#	runlevel=multi : The standard multi-user runlevel.
+# If you have the KDM service run file installed, you can use KDM as the default login rather
+# than the standard console.
+runlevel=multi
+
+# Normally we should not expect a failure during Stage 2, but just in case we run into
+# a possibility of a failed boot, we can launch a command shell for the kernel cmdline
+# to regain control and repair the system.
+for arg in $(cat /proc/cmdline); do
+    case $arg in
+        single) echo "Initializing single user mode..."; runlevel=single;;
+    esac
+done
+
+# Setup first tty as unicode again, stage1 does not work correctly for tty1.
+unicode_start
+
+# Create runlevel dynamic directory and then make it the default.
+if [ -d /etc/runit/runsvdir/${runlevel} ]; then
+    mkdir -p /run/runit/runsvdir
+    ln -s /etc/runit/runsvdir/${runlevel} /run/runit/runsvdir/current
+fi
+
+# Start all services detected in the current runlevel directory.
+exec env - PATH=$PATH \
+    runsvdir -P /run/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+

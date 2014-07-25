@@ -1,0 +1,5 @@
+#!/bin/sh
+# Begin acpid service run file
+exec 2>&1
+exec acpid -c /etc/acpi/events -f
+# End of acpid service run file

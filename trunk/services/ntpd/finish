@@ -1,0 +1,3 @@
+#!/bin/sh
+kill -9 $(pidof ntpd)
+rm /var/run/ntpd.pid

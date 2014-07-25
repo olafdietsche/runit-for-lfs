@@ -2,26 +2,37 @@
       system we used a script to auto-create the directories upon install. This could also
       be done via the Makefile.
 [ ] - Create/Import run service files for the following services:
-          [ ] - saslauthd
-          [ ] - nfs-client
-          [ ] - nfs-server
-          [ ] - slapd
+          [ ] - agetty-tty1
+          [ ] - agetty-tty2
+          [ ] - agetty-tty3
+          [ ] - agetty-tty4
+          [ ] - agetty-tty5
+          [ ] - agetty-tty6
+          [ ] - agetty-ttyS0
           [ ] - dovecot
+          [ ] - haveged
           [ ] - heimdal
+          [ ] - iptables-ipv4
+          [ ] - iptables-ipv6
           [ ] - krb5
           [ ] - netfs
-          [ ] - dhcpd
-          [ ] - rsyncd
-          [ ] - vsftpd
           [ ] - networkmanager
-          [ ] - svn
-          [ ] - sendmail
+          [ ] - nfs-client
+          [ ] - nfs-server
           [ ] - qpopper
-          [ ] - swat
-          [ ] - virtuoso
+          [ ] - rsyncd
+          [ ] - saslauthd
+          [ ] - sendmail
+          [ ] - slapd
           [ ] - soprano
-          [ ] - winbindd
           [ ] - stunnel
+          [ ] - svn
+          [ ] - swat
+          [ ] - syslog
+          [ ] - sysstat
+          [ ] - virtuoso
+          [ ] - vsftpd
+          [ ] - winbindd
 [ ] - Clean up pid files to move system services into dedicated pipes.
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS.

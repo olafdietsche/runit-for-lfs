@@ -40,7 +40,6 @@ install -d /etc/sv
 install -d /etc/runit/runsvdir
 install -m755 ${SCRIPTS} /etc/runit
 install -m644 runit.conf /etc
-cp -aP runsvdir/* /etc/runit/runsvdir/
 cp -aP services/* /etc/sv/
 
 uninstall:

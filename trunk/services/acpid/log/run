@@ -1,0 +1,4 @@
+#!/bin/sh
+# Begin acpid log service file
+exec /usr/sbin/svlogd -tt /var/log/acpid
+# End of acpid log service run file

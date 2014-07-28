@@ -2,13 +2,13 @@
       system we used a script to auto-create the directories upon install. This could also
       be done via the Makefile.
 [ ] - Create/Import run service files for the following services:
-          [ ] - agetty-tty1
-          [ ] - agetty-tty2
-          [ ] - agetty-tty3
-          [ ] - agetty-tty4
-          [ ] - agetty-tty5
-          [ ] - agetty-tty6
-          [ ] - agetty-ttyS0
+          [x] - agetty-tty1
+          [x] - agetty-tty2
+          [x] - agetty-tty3
+          [x] - agetty-tty4
+          [x] - agetty-tty5
+          [x] - agetty-tty6
+          [x] - agetty-ttyS0
           [ ] - dovecot
           [ ] - haveged
           [ ] - heimdal
@@ -16,7 +16,7 @@
           [ ] - iptables-ipv6
           [ ] - krb5
           [ ] - netfs
-          [ ] - networkmanager
+          [x] - networkmanager
           [ ] - nfs-client
           [ ] - nfs-server
           [ ] - qpopper

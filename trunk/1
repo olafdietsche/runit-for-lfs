@@ -36,7 +36,7 @@ PATH=/usr/bin:/usr/sbin
 
 msg "Welcome to Linux From Scratch! \n"
 
-# By default Stage-1 should already come with the system defaults and recommended setups.
+# By default Stage 1 should already come with the system defaults and recommended setups.
 # If you need to load anything optional, you may use the /etc/runit.conf file as a method
 # to load optional system preferences.
 . /etc/runit.conf
@@ -121,7 +121,7 @@ if [ -x /usr/sbin/dmraid ]; then
 fi
 
 # If we have any BtrFS partitions, we'll load them here. By default BtrFS is not utilized by
-# Linux FRom Scratch and is considered highly unstable as a file system. This section is only
+# Linux From Scratch and is considered highly unstable as a file system. This section is only
 # here for compatibility reasons, and will require the btrsfs utilities packages to be installed.
 if [ -x /usr/bin/btrfs ]; then
     msg "Activating btrfs devices...\n"
@@ -169,7 +169,7 @@ msg "Initializing random seed...\n"
 cp /var/lib/random-seed /dev/urandom >/dev/null 2>&1 || true
 ( umask 077; dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1 )
 
-# This will remove any file-system check waterwarks and other data.
+# This will remove any file-system check watermarks and other data.
 install -m0664 -o root -g utmp /dev/null /run/utmp
 rm -f /etc/nologin /forcefsck /forcequotacheck /fastboot
 
@@ -205,4 +205,4 @@ dmesg >/var/log/dmesg.log
 install -m0 /dev/null /etc/runit/reboot
 install -m0 /dev/null /etc/runit/stopit
 
-msg "Initialization complete, running stage 2...\n"
+msg "Initialization complete, running stage 2... \n"

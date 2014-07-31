@@ -55,7 +55,7 @@ umount /tmp
 swapoff -a
 umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
 
-# Remoun the root file system in read-only.
+# Remount the root file system in read-only.
 echo "Remounting rootfs read-only..."
 mount -o remount,ro /
 

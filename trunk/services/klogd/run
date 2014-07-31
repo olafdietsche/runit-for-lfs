@@ -1,2 +1,2 @@
 #!/bin/sh
-exec klogd -n
+exec klogd -c 3 -n

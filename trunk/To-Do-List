@@ -28,7 +28,7 @@
           [ ] - stunnel
           [ ] - svn
           [ ] - swat
-          [ ] - syslog
+          [x] - syslog
           [ ] - sysstat
           [ ] - virtuoso
           [ ] - vsftpd

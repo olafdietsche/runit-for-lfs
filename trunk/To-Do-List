@@ -38,3 +38,7 @@
       by BLFS.
 [ ] - Clean up Makefile as/if necessary. (WIP)
 [ ] - Fix Networking table up for error handling.
+[ ] - Add CleanFS handler to stage-1.
+[ ] - Check rc.site file for needed cutomizations.
+[ ] - Add msg_fail and msg_ok triggers as needed.
+

@@ -10,10 +10,10 @@ PATH=/usr/bin:/usr/sbin
 . /etc/runit.conf
 
 # If rebooting, send the reboot command and execute the reboot file.
-if [ -e /run/runit/reboot ]; then
-    touch /etc/runit/reboot
-    chmod 100 /etc/runit/reboot
-fi
+#if [ -e /run/runit/reboot ]; then
+#    touch /etc/runit/reboot
+#    chmod 100 /etc/runit/reboot
+#fi
 
 # This stops the services, and brings down all the services in 15 seconds. Normally
 # Runit uses a few minutes to bring down services, but unless totally necessary, the

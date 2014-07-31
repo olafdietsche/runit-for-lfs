@@ -36,6 +36,48 @@ base directory, we'll install Runit into the system:
   
 This should install all files to the proper locations.
 
+Now you'll want to install the service files. In the trunk directory issue:
+
+  make && make install
+  
+Several binaries and scripts critical to the system controls will be installed:
+
+  pause    - /usr/bin - A simple service state holding program.
+  shutdown - /sbin    - A script that functions to shutdown the system.
+  halt     - /sbin    - A program to mimic the functions of sysvinit's halt.
+  reboot   - /sbin    - A symlink to halt that issues restart command.
+  poweroff - /sbin    - A symlink to halt that powers down the system.
+  suspend  - /sbin    - A small program to suspend the system state.
+
+Along with these, several key components of the LFS networking scripts will be
+installed as well.
+
+To use scripts. You must first make the script executable such as:
+
+  chmod +x /etc/sv/agetty-tty1/*
+  
+Note: Some services have a log run file as well so you would need to issue a
+      command for chmod +x on the run file of the log directory.
+      
+Now to link a service into the execution path, issue something like this:
+
+If you are in (chroot):
+
+  ln -sv /etc/sv/agetty-tty1 /etc/runit/runsvdir/multi
+  
+If you are the system itself:
+
+  ln -sv /etc/sv/dbus /var/service
+  
+This will start a getty in multi-user mode. For any other services you'll issue
+a similar command in chroot.
+
+You'll need to at least assign one getty, syslogd, klogd at minimum.
+
+Take note:
+
+Service agetty-ttyS0 must go into the /etc/runit/runsvdir/single prior to boot.
+
 ================================================================================
 
 Description of application files:

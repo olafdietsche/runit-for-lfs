@@ -41,4 +41,4 @@
 [ ] - Add CleanFS handler to stage-1.
 [ ] - Check rc.site file for needed cutomizations.
 [ ] - Add msg_fail and msg_ok triggers as needed.
-
+[ ] - Add Stage 3 Network Shutdown section.

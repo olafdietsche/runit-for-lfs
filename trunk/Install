@@ -72,9 +72,9 @@ If you are the system itself:
 This will start a getty in multi-user mode. For any other services you'll issue
 a similar command in chroot.
 
-You'll need to at least assign one getty, syslogd, klogd at minimum.
+You'll need to at least assign multi the following:
 
-Take note:
+agetty-tty1~6, syslogd, klogd, and sulogin.
 
 Service agetty-ttyS0 must go into the /etc/runit/runsvdir/single prior to boot.
 

@@ -36,4 +36,5 @@
 [ ] - Clean up pid files to move system services into dedicated pipes.
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS.
-[ ] - Clean up Makefile as/if necessary.
+[ ] - Clean up Makefile as/if necessary. (WIP)
+[ ] - Fix Networking table up for error handling.

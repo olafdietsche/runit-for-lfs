@@ -74,6 +74,9 @@ umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
 echo "Remounting rootfs read-only..."
 mount -o remount,ro /
 
+# Turn off the local loopback
+ip link set lo down
+
 # Shutdown the system.
 sleep 1
 sync

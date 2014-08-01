@@ -25,10 +25,25 @@ sv exit /var/service/*
 # Load the emergency superuser shell just case a failure arises.
 stty onlcr
 
+# This will stop and bring down the network interfaces.
+for file in  /etc/sysconfig/ifconfig.*
+do
+   net_files="${file} ${net_files}"
+done
+for file in ${net_files}
+do
+   interface=${file##*/ifconfig.}
+   # Skip if $file is * (because nothing was found)
+   if [ "${interface}" = "*" ]
+   then
+            continue
+   fi
+   /sbin/ifdown ${interface}
+done
+
 # This saves the entropy file.
 echo "Saving random seed..."
 dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1
-
 
 # Save the hardware and system clocks.
 if [ -n "$HARDWARECLOCK" ]; then

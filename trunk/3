@@ -4,7 +4,7 @@
 # Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
 # Work derived from VoidLinux and Ignite and adapted for LFS.
 
-PATH=/usr/bin:/usr/sbin
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
 # First re-read the configuration to see if any special parameters are needed.
 . /etc/runit.conf

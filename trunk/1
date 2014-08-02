@@ -108,12 +108,9 @@ msg "Setting up loopback interface...\n"
 ip link set up dev lo
 
 # We'll load the system hostname, if it exists.
-if [ -n "$HOSTNAME" ]; then
-    echo "$HOSTNAME" > /proc/sys/kernel/hostname
-elif [ -r /etc/hostname ]; then
-    HOSTNAME=$(cat /etc/hostname)
-    echo "$HOSTNAME" > /proc/sys/kernel/hostname
-fi
+[ -r /etc/sysconfig/network ] && . /etc/sysconfig/network
+[ -r /etc/hostname ] && HOSTNAME=$(cat /etc/hostname)
+hostname ${HOSTNAME} &>/dev/null
 msg "Setting up hostname to '${HOSTNAME}'...\n"
 
 # If we have any RAID devices, we'll now load them.

@@ -51,21 +51,21 @@ int main(int argc, char *argv[]) {
     if (do_force)
       reboot(RB_HALT_SYSTEM);
     else
-      execl("/bin/runit-init", "init", "0", (char*)0);
+      execl("/sbin/runit-init", "init", "0", (char*)0);
     err(1, "halt failed");
     break;
   case POWEROFF:
     if (do_force)
       reboot(RB_POWER_OFF);
     else
-      execl("/bin/runit-init", "init", "0", (char*)0);
+      execl("/sbin/runit-init", "init", "0", (char*)0);
     err(1, "poweroff failed");
     break;
   case REBOOT:
     if (do_force)
       reboot(RB_AUTOBOOT);
     else
-      execl("/bin/runit-init", "init", "6", (char*)0);
+      execl("/sbin/runit-init", "init", "6", (char*)0);
     err(1, "reboot failed");
     break;
   case NOOP:
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
     Blog
     About
 
-    © 2014 GitHub, Inc.
+    Â© 2014 GitHub, Inc.
     Terms
     Privacy
     Security

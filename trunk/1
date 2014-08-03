@@ -108,8 +108,8 @@ ip link set up dev lo
 # We'll load the system hostname, if it exists.
 [ -r /etc/sysconfig/network ] && . /etc/sysconfig/network
 [ -r /etc/hostname ] && HOSTNAME=$(cat /etc/hostname)
-hostname ${HOSTNAME} &>/dev/null
 msg "Setting up hostname to '${HOSTNAME}'...\n"
+hostname ${HOSTNAME} &>/dev/null
 
 # If we have any RAID devices, we'll now load them.
 if [ -x /usr/sbin/dmraid ]; then

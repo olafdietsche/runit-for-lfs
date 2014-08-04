@@ -45,14 +45,15 @@ msg "Welcome to Linux From Scratch! \n"
 # This section reduplicates this functionality and simplifies the process. We'll also create a
 # run platform for Runit as well.
 msg "Mounting pseudo-filesystems...\n"
-mountpoint -q /proc || mount -o nosuid,noexec,nodev /proc
-mountpoint -q /sys || mount -o nosuid,noexec,nodev /sys
-mountpoint -q /run || mount -o mode=0755,nosuid,nodev /run
-mountpoint -q /dev || mount -o mode=0755,nosuid /dev
-mkdir -p -m0755 /run/lvm /run/user /dev/pts /dev/shm
-mountpoint -q /dev/pts || mount -o mode=0620,gid=5,nosuid,noexec /dev/pts
-mountpoint -q /dev/shm || mount -n -t tmpfs shm /dev/shm -o mode=1777,nosuid,nodev
+mountpoint -q /run || mount /run
+mkdir -p -m0755 /run/{lvm,user,var,lock,shm}
+chmod 1777 /run/shm
+mountpoint -q /proc || mount /proc
+mountpoint -q /sys || mount /sys
+mountpoint -q /dev || mount /dev
 ln -sfn /run/shm /dev/shm
+mkdir -p -m0755 /dev/pts
+mountpoint -q /dev/pts || mount /dev/pts
 
 # Let's get root mounted at least in read-only for now.
 msg "Remounting rootfs read-only...\n"

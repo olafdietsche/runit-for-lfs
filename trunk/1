@@ -144,6 +144,13 @@ fi
 msg "Mounting rootfs read-write...\n"
 mount -o remount,rw /
 
+# Start the system and kernel log daemons.
+. /etc/sysconfig/rc.site
+parms=${SYSKLOGD_PARMS-'-m 0'}
+msg "Starting system and kernel log daemons...\n"
+syslogd $parms &>/dev/null
+klogd &>/dev/null
+
 # Any non-networked file systems will now be mounted.
 msg "Mounting all non-network filesystems...\n"
 mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev

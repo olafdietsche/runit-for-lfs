@@ -42,8 +42,8 @@ msg "Welcome to Linux From Scratch! \n"
 . /etc/runit.conf
 
 # Let's mount the kernel virtual file systems here. In the past mountvirtfs was used to do this.
-# This section reduplicates this functionality and simplifies the process. We'll also create a
-# run platform for Runit as well.
+# This section reduplicates this functionality and simplifies the process. This will read fstab
+# properly and mount according to the triggers specificed.
 msg "Mounting pseudo-filesystems...\n"
 mountpoint -q /run || mount /run
 mkdir -p -m0755 /run/{lvm,user,var,lock,shm}

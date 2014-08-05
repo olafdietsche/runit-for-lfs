@@ -33,6 +33,8 @@ base directory, we'll install Runit into the system:
   mkdir -pv /etc/sv
   mkdir -pv /etc/runit/runsvdir/single
   mkdir -pv /etc/runit/runsvdir/multi
+  mkdir -pv /etc/runit/runsvdir/current
+  ln -sv /etc/runit/runsvdir/current /var/service
   
 This should install all files to the proper locations.
 

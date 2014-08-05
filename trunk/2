@@ -26,17 +26,7 @@ done
 # Setup first tty as unicode again, stage1 does not work correctly for tty1.
 unicode_start
 
-# Create runlevel current directory and link it to the /var/service directory:
-if [ -d /etc/runit/runsvdir/${runlevel} ]; then
-    ln -s /etc/runit/runsvdir/${runlevel} /etc/runit/runsvdir/current
-fi
-
-# Create link to the service supervision directory:
-if [ -d /var/service ]; then
-    ln -s /etc/runit/runsvdir/current /var/service
-fi
-
 # Start all services detected in the current runlevel directory.
 exec env - PATH=$PATH \
-    runsvdir -P /etc/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+    runsvdir -P /etc/runit/runsvdir/${runlevel} 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
 

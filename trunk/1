@@ -85,8 +85,8 @@ fi
 # Let's get udev started. This is the first pass for udev, so it should trigger any and all
 # devices during this stage, if it doesn't the second pass will pick up anything else not
 # properly loaded.
-if [ -x /usr/sbin/udevd ]; then
-    _udevd=/usr/sbin/udevd
+if [ -x /sbin/udevd ]; then
+    _udevd=/sbin/udevd
 else
     msg_warn "cannot find udevd!\n"
 fi

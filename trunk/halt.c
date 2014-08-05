@@ -75,16 +75,3 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-    Status
-    API
-    Training
-    Shop
-    Blog
-    About
-
-    © 2014 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Contact
-

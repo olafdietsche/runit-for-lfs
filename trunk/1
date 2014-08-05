@@ -187,11 +187,12 @@ fi
 
 # Let's set the kernel runtime parameters if any exist.
 if [ -f "/etc/sysctl.conf" ]; then
-    msg "Setting kernel runtime parameters..."
+    msg "Setting kernel runtime parameters...\n"
     sysctl -q -p
 fi
 
 # Start all network interfaces up.
+msg "Starting networking interfaces...\n"
 for file in /etc/sysconfig/ifconfig.*
   do
     interface=${file##*/ifconfig.}

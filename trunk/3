@@ -10,7 +10,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin
 . /etc/runit.conf
 
 # If rebooting, send the reboot command and execute the reboot file.
-if [ -e /run/runit/reboot ]; then
+if [ -e /etc/runit/reboot ]; then
     touch /etc/runit/reboot
     chmod 100 /etc/runit/reboot
 fi

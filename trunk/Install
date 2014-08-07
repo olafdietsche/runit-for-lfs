@@ -76,7 +76,7 @@ a similar command in chroot.
 
 You'll need to at least assign multi the following:
 
-agetty-tty1~6, syslogd, klogd, and sulogin.
+agetty-tty1~6
 
 Service agetty-ttyS0 must go into the /etc/runit/runsvdir/single prior to boot.
 

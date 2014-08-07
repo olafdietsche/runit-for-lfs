@@ -2,13 +2,6 @@
       system we used a script to auto-create the directories upon install. This could also
       be done via the Makefile.
 [ ] - Create/Import run service files for the following services:
-          [x] - agetty-tty1
-          [x] - agetty-tty2
-          [x] - agetty-tty3
-          [x] - agetty-tty4
-          [x] - agetty-tty5
-          [x] - agetty-tty6
-          [x] - agetty-ttyS0
           [ ] - dovecot
           [ ] - haveged
           [ ] - heimdal
@@ -16,7 +9,6 @@
           [ ] - iptables-ipv6
           [ ] - krb5
           [ ] - netfs
-          [x] - networkmanager
           [ ] - nfs-client
           [ ] - nfs-server
           [ ] - qpopper
@@ -28,7 +20,6 @@
           [ ] - stunnel
           [ ] - svn
           [ ] - swat
-          [x] - syslog
           [ ] - sysstat
           [ ] - virtuoso
           [ ] - vsftpd
@@ -43,3 +34,11 @@
 [ ] - Add msg_fail and msg_ok triggers as needed.
 [x] - Add Stage 3 Network Shutdown section.
 [ ] - Thoroughly test Makefile. Several "install" paths accidentally were not working.
+[ ] - Remove all required instances of reference and usage of /lib/lsb/init-functions. This
+      was left over from sysvinit and isn't needed by Runit.
+[ ] - Remove sulogin service. This service is pointless for our implementation and only
+      introduces a further headache on the system by forcing the user to login multiple times
+      and it makes job control in the shell unusable.
+[ ] - Thoroughly check each service run file for errors. Currently on some systems used for
+      testing and development, service sshd refuses to start properly, and stay in the "up"
+      status.

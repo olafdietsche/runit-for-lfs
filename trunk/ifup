@@ -28,7 +28,7 @@ up()
      fi
 
   else
-     log_failure_msg "\nInterface ${IFACE} doesn't exist."
+     echo "Interface ${IFACE} doesn't exist."
      exit 1
   fi
 }
@@ -70,35 +70,35 @@ file=/etc/sysconfig/ifconfig.${1}
 # Skip backup files
 [ "${file}" = "${file%""~""}" ] || exit 0
 
-. /lib/lsb/init-functions
+#. /lib/lsb/init-functions
 
-log_info_msg "Bringing up the ${1} interface... "
+echo "Bringing up the ${1} interface... "
 
 if [ ! -r "${file}" ]; then
-   log_failure_msg2 "${file} is missing or cannot be accessed." 
+   echo "${file} is missing or cannot be accessed." 
    exit 1
 fi
 
 . $file
 
 if [ "$IFACE" = "" ]; then
-   log_failure_msg2 "${file} does not define an interface [IFACE]."
+   echo "${file} does not define an interface [IFACE]."
    exit 1
 fi
 
 # Do not process this service if started by boot, and ONBOOT
 # is not set to yes
 if [ "${IN_BOOT}" = "1" -a "${ONBOOT}" != "yes" ]; then
-   log_info_msg2 "skipped"
+   echo "skipped"
    exit 0
 fi
 
 for S in ${SERVICE}; do
   if [ ! -x "/lib/services/${S}" ]; then
-    MSG="\nUnable to process ${file}.  Either " 
-    MSG="${MSG}the SERVICE '${S} was not present "
-    MSG="${MSG}or cannot be executed."
-    log_failure_msg "$MSG"
+    echo "Unable to process ${file}.  Either " 
+    echo "${MSG}the SERVICE '${S} was not present "
+    echo "${MSG}or cannot be executed."
+    echo "$MSG"
     exit 1
   fi
 done
@@ -118,18 +118,18 @@ if test -n "${MTU}"; then
          ip link set dev $I mtu $MTU; 
       done
    else
-      log_info_msg2 "Invalid MTU $MTU"
+      echo "Invalid MTU $MTU"
    fi
 fi 
 
 # Set the route default gateway if requested
 if [ -n "${GATEWAY}" ]; then
    if ip route | grep -q default; then
-      log_warning_msg "\nGateway already setup; skipping."
+      echo "Gateway already setup; skipping."
    else
-      log_info_msg "Setting up default gateway..."
+      echo "Setting up default gateway..."
       ip route add default via ${GATEWAY} dev ${IFACE}
-      evaluate_retval
+      #evaluate_retval
    fi
 fi
 

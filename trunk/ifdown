@@ -53,17 +53,17 @@ file=/etc/sysconfig/ifconfig.${1}
 # Skip backup files
 [ "${file}" = "${file%""~""}" ] || exit 0
 
-. /lib/lsb/init-functions 
+#. /lib/lsb/init-functions 
 
 if [ ! -r "${file}" ]; then
-   log_warning_msg "${file} is missing or cannot be accessed."
+   echo "${file} is missing or cannot be accessed."
    exit 1
 fi
 
 . ${file}
 
 if [ "$IFACE" = "" ]; then
-   log_failure_msg "${file} does not define an interface [IFACE]."
+   echo "${file} does not define an interface [IFACE]."
    exit 1
 fi
 
@@ -77,11 +77,11 @@ if ip link show ${IFACE} > /dev/null 2>&1; then
      MSG="Unable to process ${file}.  Either "
      MSG="${MSG}the SERVICE variable was not set "
      MSG="${MSG}or the specified service cannot be executed."
-     log_failure_msg "$MSG"
+     echo "$MSG"
      exit 1
   fi
 else
-   log_warning_msg "Interface ${1} doesn't exist."
+   echo "Interface ${1} doesn't exist."
 fi
 
 # Leave the interface up if there are additional interfaces in the device
@@ -90,9 +90,9 @@ link_status=`ip link show ${IFACE} 2>/dev/null`
 if [ -n "${link_status}" ]; then
    if [ "$(echo "${link_status}" | grep UP)" != "" ]; then
       if [ "$(ip addr show ${IFACE} | grep 'inet ')" == ""  ]; then
-         log_info_msg "Bringing down the ${IFACE} interface..."
+         echo "Bringing down the ${IFACE} interface..."
          ip link set ${IFACE} down
-         evaluate_retval
+         #evaluate_retval
       fi
    fi
 fi

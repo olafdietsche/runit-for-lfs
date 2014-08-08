@@ -14,12 +14,12 @@
 
 case "$2" in
         up)
-                boot_mesg "Bringing up the PPPoE interface..."
+                echo "Bringing up the PPPoE interface..."
                 loadproc -p /var/run/ppp-${1}.pid pppd call pppoe ${1} linkname ${1} ${PPP_OPTS}
         ;;
 
         down)
-                boot_mesg "Bringing down the PPPoE interface..."
+                echo "Bringing down the PPPoE interface..."
                 killproc -p /var/run/ppp-${1}.pid pppd
         ;;
 

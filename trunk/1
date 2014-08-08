@@ -192,6 +192,7 @@ if [ -f "/etc/sysctl.conf" ]; then
 fi
 
 # Start all network interfaces up.
+export IN_BOOT=1
 msg "Starting networking interfaces...\n"
 for file in /etc/sysconfig/ifconfig.*
   do
@@ -203,6 +204,7 @@ for file in /etc/sysconfig/ifconfig.*
         fi
     /sbin/ifup ${interface}
   done
+unset IN_BOOT
 
 # Log the system boot.
 dmesg >/var/log/dmesg.log

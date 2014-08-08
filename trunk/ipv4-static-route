@@ -12,7 +12,7 @@
 #
 ########################################################################
 
-. /lib/lsb/init-functions
+#. /lib/lsb/init-functions
 . ${IFCONFIG}
 
 case "${TYPE}" in
@@ -38,25 +38,25 @@ case "${TYPE}" in
    ;;
 
    (*)
-      log_failure_msg "Unknown route type (${TYPE}) in ${IFCONFIG}, cannot continue."
+      echo "Unknown route type (${TYPE}) in ${IFCONFIG}, cannot continue."
       exit 1
    ;;
 esac
 
 if [ -n "${GATEWAY}" ]; then
-   MSG="The GATEWAY variable cannot be set in ${IFCONFIG} for static routes.\n"
-   log_failure_msg "$MSG Use STATIC_GATEWAY only, cannot continue"
+   echo "The GATEWAY variable cannot be set in ${IFCONFIG} for static routes."
+   echo "$MSG Use STATIC_GATEWAY only, cannot continue"
    exit 1
 fi
 
 if [ -n "${need_ip}" ]; then
    if [ -z "${IP}" ]; then
-      log_failure_msg "IP variable missing from ${IFCONFIG}, cannot continue."
+      echo "IP variable missing from ${IFCONFIG}, cannot continue."
       exit 1
    fi
 
    if [ -z "${PREFIX}" ]; then
-      log_failure_msg "PREFIX variable missing from ${IFCONFIG}, cannot continue." 
+      echo "PREFIX variable missing from ${IFCONFIG}, cannot continue." 
       exit 1
    fi
    
@@ -66,7 +66,7 @@ fi
 
 if [ -n "${need_gateway}" ]; then
    if [ -z "${STATIC_GATEWAY}" ]; then
-      log_failure_msg "STATIC_GATEWAY variable missing from ${IFCONFIG}, cannot continue."
+      echo "STATIC_GATEWAY variable missing from ${IFCONFIG}, cannot continue."
       exit 1
    fi
    args="${args} via ${STATIC_GATEWAY}"
@@ -78,13 +78,13 @@ fi
 
 case "${2}" in
    up)
-      log_info_msg "Adding '${desc}' route to the ${1} interface..."
+      echo "Adding '${desc}' route to the ${1} interface..."
       ip route add ${args} dev ${1}
       evaluate_retval
    ;;
    
    down)
-      log_info_msg "Removing '${desc}' route from the ${1} interface..."
+      echo "Removing '${desc}' route from the ${1} interface..."
       ip route del ${args} dev ${1}
       evaluate_retval
    ;;

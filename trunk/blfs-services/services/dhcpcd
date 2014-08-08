@@ -46,10 +46,8 @@ case "$2" in
        echo "Stopping dhcpcd on the $1 interface..."
 
        if [ -z "$DHCP_STOP" ]; then
-          kill -15 $(pidof /sbin/dhcpcd)
-          sleep 3
-          kill -9 $(pidof /sbin/dhcpcd)
-          sleep 3
+          kill -9 $(cat ${pidfile})
+          rm -f ${pidfile}
 
        else
           /sbin/dhcpcd $1 $DHCP_STOP &> /dev/null

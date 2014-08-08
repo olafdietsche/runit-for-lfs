@@ -11,7 +11,7 @@
 #$LastChangedBy: krejzi $
 #$Date: 2013-02-11 16:22:35 +0000 (Mon, 11 Feb 2013) $
 
-. /lib/lsb/init-functions
+#. /lib/lsb/init-functions
 . $IFCONFIG
 
 PIDFILE=/run/dhclient-$1.pid
@@ -38,19 +38,19 @@ case "$2" in
      if [ -e ${PIDFILE} ]; then
         ps $(cat ${PIDFILE}) | grep dhclient >/dev/null
         if [ "$?" = "0" ]; then
-           log_warning_msg "\n dhclient appears to be running on $1"
+           echo "dhclient appears to be running on $1."
            exit 0
         else
            rm ${PIDFILE}
         fi
      fi
 
-      log_info_msg "\n Starting dhclient on the $1 interface..."
+      echo "Starting dhclient on the $1 interface..."
 
       /sbin/dhclient -lf ${LFILE} -pf ${PIDFILE} $DHCP_START $1
 
       if [ "$?" != "0" ]; then
-        log_failure_msg2
+        echo "dhclient failed to start."
         exit 1
       fi
 
@@ -77,26 +77,26 @@ case "$2" in
         if [ "$PRINTALL" = "yes" ]; then
            # This is messy, the messages are on one very long
            # line on the screen and in the log
-           log_info_msg "           DHCP Assigned Settings for $1:"
-           log_info_msg "           IP Address:      $IPADDR"
-           log_info_msg "           Subnet Mask:     $NETMASK"
-           log_info_msg "           Default Gateway: $GATEWAY"
-           log_info_msg "           DNS Server:      $DNS"
+           echo "           DHCP Assigned Settings for $1:"
+           echo "           IP Address:      $IPADDR"
+           echo "           Subnet Mask:     $NETMASK"
+           echo "           Default Gateway: $GATEWAY"
+           echo "           DNS Server:      $DNS"
         else
-           log_info_msg " IP Addresss:""$IPADDR"
+           echo "IP Addresss:""$IPADDR"
         fi
       fi
 
-      log_success_msg2
+      echo "dhclient was successfully started."
    ;;
 
    down)
       if [ ! -e ${PIDFILE} ]; then
-         log_warning_msg "\n dhclient doesn't appear to be running on $1"
+         echo "dhclient doesn't appear to be running on $1."
          exit 0
       fi
 
-      log_info_msg "\n Stopping dhclient on the $1 interface..."
+      echo "Stopping dhclient on the $1 interface..."
 
       /sbin/dhclient -r -lf ${LFILE} -pf ${PIDFILE} $DHCP_STOP $1
 
@@ -105,7 +105,7 @@ case "$2" in
          rm -f ${PIDFILE}
       fi
 
-      evaluate_retval
+      #evaluate_retval
    ;;
 
    *)

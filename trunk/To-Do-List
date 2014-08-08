@@ -42,3 +42,20 @@
 [ ] - Thoroughly check each service run file for errors. Currently on some systems used for
       testing and development, service sshd refuses to start properly, and stay in the "up"
       status.
+      
+Flagged for deletion:
+
+The following files are deprecated and do not need to be included and are going to be expunged
+during the next cycle I'm accessing the SVN directly.
+
+[ ] modules - Was determined it was unnecessary.
+[ ] init-functions - Was a hold over from sysvinit. No longer needed and scripts requiring
+    function calls to are are now removed and edited.
+[ ] blfs-services/pppoe and pppoe lsb script - The BLFS project removed them a long time ago
+    and the maintainers have said they were up to be removed as well.
+[ ] blfs-services ipx lsb script - BLFS project removed this as well. Considering how old
+    IPX is as a protocol, I'm not surprised as barely anything would even begin to use it
+    any longer.
+[ ] services/sulogin - After testing, I determined this script was pointless. sulogin is
+    already handled by the system as it is. The service run files are redundant, and break
+    the shell job control functions.

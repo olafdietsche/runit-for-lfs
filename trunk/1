@@ -172,46 +172,11 @@ if ! is_true "$SKIPTMPCLEAN" ; then
     find . -xdev -mindepth 1 ! -name lost+found -delete &>/dev/null
 fi
 
-# Create files and directories specified in /etc/sysconfig/createfiles.
-msg "Processing /etc/sysconfig/createfiles...\n"
-if egrep -qv '^(#|$)' /etc/sysconfig/createfiles &>/dev/null ; then
-   exec 9>&0 < /etc/sysconfig/createfiles
-   while read name type perm usr grp dtype maj min junk ; do
-      # Ignore comments and blank lines.
-      case "${name}" in
-         ""|\#*) continue ;;
-      esac
-      # Ignore existing files.
-      if [ ! -e "${name}" ]; then
-         # Create files and dirs.
-         case "${type}" in
-            dir)
-               mkdir "${name}" ;;
-            file)
-               :> "${name}" ;;
-            dev)
-               case "${dtype}" in
-                  char)
-                     mknod "${name}" c ${maj} ${min} ;;
-                  block)
-                     mknod "${name}" b ${maj} ${min} ;;
-                  pipe)
-                     mknod "${name}" p ;;
-                  *) 
-                     echo -e "/etc/sysconfig/createfiles: Unknown device type: ${dtype}" ;;
-               esac ;;
-            *)
-               echo -e "/etc/sysconfig/createfiles: Unknown type: ${type}"
-               continue ;;
-         esac
-         # Set permissions.
-         chown ${usr}:${grp} "${name}"
-         chmod ${perm} "${name}"
-      fi
-   done
-   # Close file descriptor 9 (end redirection)
-   exec 0>&9 9>&-
-fi
+# Create files and directories specified in an array in /etc/runit.conf.
+msg "Creating files and directories specified in /etc/runit.conf...\n"
+for i in "${CREATEFILES[@]}" ; do
+    eval "$i"
+done
 
 # Copy udev rules generated before / was mounted rw.
 msg "Copying udev rules to /etc/udev/rules.d...\n"

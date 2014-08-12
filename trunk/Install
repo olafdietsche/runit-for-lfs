@@ -6,7 +6,7 @@ Installation of Runit
 
 First download a copy of Runit from the Runit homepage here:
 
-  http://smarden.org/runit/runit-2.1.1.tar.gz
+  http://smarden.org/runit/runit-2.1.2.tar.gz
 
 Or use git to checkout a copy:
 
@@ -15,7 +15,7 @@ Or use git to checkout a copy:
 Unpack the sources as you would any other source package and the change directory to
 the Runit directory in the package as such:
 
-  cd admin/runit-2.1.1
+  cd admin/runit-2.1.2
 
 Now we'll build the package using this command:
 

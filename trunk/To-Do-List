@@ -48,7 +48,7 @@ Flagged for deletion:
 The following files are deprecated and do not need to be included and are going to be expunged
 during the next cycle I'm accessing the SVN directly.
 
-[ ] modules - Was determined it was unnecessary.
+[x] modules - Was determined it was unnecessary.
 [ ] init-functions - Was a hold over from sysvinit. No longer needed and scripts requiring
     function calls to are are now removed and edited.
 [ ] blfs-services/pppoe and pppoe lsb script - The BLFS project removed them a long time ago

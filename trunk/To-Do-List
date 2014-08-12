@@ -27,7 +27,10 @@
 [ ] - Clean up pid files to move system services into dedicated pipes.
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS.
-[ ] - Clean up Makefile as/if necessary. (WIP)
+[ ] - Rewrite Makefile into separated scripts:
+	install.sh
+	build.sh
+	remove.sh
 [ ] - Fix Networking table up for error handling.
 [ ] - Add CleanFS handler to stage-1.
 [ ] - Check rc.site file for needed cutomizations.
@@ -36,7 +39,7 @@
 [ ] - Thoroughly test Makefile. Several "install" paths accidentally were not working.
 [ ] - Remove all required instances of reference and usage of /lib/lsb/init-functions. This
       was left over from sysvinit and isn't needed by Runit.
-[ ] - Remove sulogin service. This service is pointless for our implementation and only
+[x] - Remove sulogin service. This service is pointless for our implementation and only
       introduces a further headache on the system by forcing the user to login multiple times
       and it makes job control in the shell unusable.
 [ ] - Thoroughly check each service run file for errors. Currently on some systems used for

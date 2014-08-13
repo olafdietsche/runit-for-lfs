@@ -212,11 +212,9 @@ msg "Initializing swap...\n"
 swapon -a
 
 # Set the time zone and update the system clock.
-if [ -n "$TIMEZONE" ] ; then
-   msg "Setting timezone to '${TIMEZONE}'...\n"
-   cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
-   TZ=$TIMEZONE hwclock --systz --$HWC --noadjfile
-fi
+msg "Setting timezone to '${TIMEZONE:-America/New_York}'...\n"
+cp /usr/share/zoneinfo/${TIMEZONE:-America/New_York} /etc/localtime
+TZ=${TIMEZONE:-America/New_York} hwclock --systz --$HWC --noadjfile
 
 # This will create an entropy file.
 msg "Initializing random seed...\n"

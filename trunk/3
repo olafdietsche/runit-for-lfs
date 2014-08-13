@@ -45,9 +45,15 @@ done
 echo "Saving random seed..."
 dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1
 
-# Save the hardware and system clocks.
-if [ -n "$HARDWARECLOCK" ]; then
-    hwclock --systohc ${HARDWARECLOCK:+--$(echo $HARDWARECLOCK |tr A-Z a-z)}
+# Set the hardware clock.
+echo "Setting the hardware clock..."
+if [[ ${HARDWARECLOCK} = UTC || ${HARDWARECLOCK} = utc ]] ; then
+    HWC=$(echo $HARDWARECLOCK | tr A-Z a-z)
+    hwclock  --systohc --$HWC
+else
+    # If HARDWARECLOCK is anything else, commented, or null, then use 'localtime' as the default...
+    HWC=localtime
+    hwclock --systohc --$HWC
 fi
 
 # Send the halt signal.

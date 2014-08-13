@@ -28,8 +28,8 @@ install -v -m 0754 ipv4-static /lib/services
 install -v -m 0644 createfiles /etc/sysconfig
 install -v -m 0644 udev_retry /etc/sysconfig
 install -v -m 0644 rc.site /etc/sysconfig
-ln -sv halt /sbin/poweroff
-ln -sv halt /sbin/reboot
+ln -sfv halt /sbin/poweroff
+ln -sfv halt /sbin/reboot
 install -v -m 0644 pause.1 /usr/share/man/man1
 install -dv /etc/sv
 install -dv /etc/runit/runsvdir

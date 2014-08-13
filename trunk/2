@@ -4,29 +4,25 @@
 # Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
 # Work derived from VoidLinux and Ignite and adapted for LFS.
 
-PATH=/bin:/sbin:/usr/bin:/usr/sbin
-
-# This will set the default runlevel similar to how sysv uses inittab.
-# Posible values for this system include:
-#	runlevel=single : Used for emergency purposes only and administrative modes.
-#	runlevel=multi : The standard multi-user runlevel.
-# If you have the KDM service run file installed, you can use KDM as the default login rather
-# than the standard console.
-runlevel=multi
-
-# Normally we should not expect a failure during Stage 2, but just in case we run into
-# a possibility of a failed boot, we can launch a command shell for the kernel cmdline
-# to regain control and repair the system.
-for arg in $(cat /proc/cmdline); do
-    case $arg in
-        single) echo "Initializing single user mode..."; runlevel=single;;
-    esac
-done
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 # Setup first tty as unicode again, stage1 does not work correctly for tty1.
 unicode_start
 
+# Try and detect if the current runlevel directory has been created yet. It
+# should exist as a symlink to the current selected runlevel via runsvchdir.
+# If the symlinked service directories are not found, they will be created.
+if [ ! -d /etc/runit/runsvdir/current ]; then
+   pushd /etc/runit/runsvdir
+   ln -s multi current
+   ln -s current /var/service
+   popd
+fi
+
+# Let runsvchdir select the default runlevel
+runsvchdir multi >/dev/null
+
 # Start all services detected in the current runlevel directory.
 exec env - PATH=$PATH \
-    runsvdir -P /etc/runit/runsvdir/${runlevel} 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+runsvdir /var/service 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
 

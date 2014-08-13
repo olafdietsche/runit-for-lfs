@@ -1,0 +1,53 @@
+.TH RUNIT.CONF 5 "10 August 2014" "Runit for LFS"
+.SH NAME
+.B runit.conf
+- a configuration file for setting various parameters
+.SH DESCRIPTION
+.B runit.conf
+is a configuration file used to set parameters and variables for various scripts that Runit uses when starting or stopping the system.
+.SH OPTIONS
+.B HARDWARECLOCK
+= [UTC|localtime]
+.PP
+Runit will use this variable to tell the hwclock program whether the hardware clock is set to Coordinated Universal Time (UTC) or local time. No other method exists for programs to determine what time system the hardware clock is using. So this variable must be set appropriately for the hardware and system clocks to be set to the correct time during booting and shutting down.
+.PP
+The only valid entries for HARDWARECLOCK are 'UTC' and 'localtime'. If HARDWARECLOCK is commented or does not contain a valid entry, Runit will default to 'localtime' which may or may not be appropriate.
+.PP
+.B TIMEZONE
+= <time zone>
+.PP
+Runit uses this variable to set the time zone for the system. When the hardware clock is using UTC, the time zone information is used to apply the appropriate hour offset to Greenwich Mean Time (GMT) for the system to display the correct local time. It also is important for Daylight Savings Time. The hwclock program uses TIMEZONE to set the TZ environment variable and the kernel time zone. The stage 1 script uses TIMEZONE to copy the appropriate time zone data file from /usr/share/zoneinfo to /etc/localtime.
+.PP
+Possible entries for this variable are found in /usr/share/zoneinfo. Use the tzselect utility for help in determining what to enter in
+.B runit.conf
+for TIMEZONE. Example...
+.PP
+.RS
+TIMEZONE=America/New_York
+.RE
+.PP
+.B CREATEFILES
+.PP
+This is an array of variables that contains shell commands to be run during booting to insure that certain needed files and directories are present at that time. Two common examples are /tmp/.ICE-unix and /tmp/.X11-unix which are required by Xorg Server.
+.PP
+The stage 1 script processess the variable array and runs the shell commands contained in each element of the array. This arrangement replaces the creatfiles function in the LFS cleanfs initscript and the /etc/sysconfig/createfiles file.
+.PP
+To add additional elements to the array in
+.B runit.conf,
+type new array elements after the last one listed, appropriately incrementing the index numbers, and followed by the shell command to be executed. Format example...
+.PP
+.RS
+CREATEFILES[1]='mkdir /path/to/directory'
+.br
+CREATEFILES[2]='mkdir /path/to/directory'
+.br
+CREATEFILES[3]='touch /path/to/file'
+.RE
+.PP
+.SH AUTHOR
+Arthur Radley
+.br
+<MisterArthurRadley@aol.com>
+.SH "REPORTING BUGS"
+Please send bug reports to <MisterArthurRadley@aol.com>
+

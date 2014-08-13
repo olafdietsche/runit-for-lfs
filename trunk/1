@@ -43,7 +43,7 @@ msg "Welcome to Linux From Scratch! \n"
 
 # The LFS rc.site file contains parameters and system variables that can customize various
 # aspects of the boot process.
-. /etc/sysconfig/rc.site &>/dev/null
+. /etc/sysconfig/rc.site
 
 # A function from init-functions.
 is_true()
@@ -86,11 +86,17 @@ fi
 msg "Setting up keymap to '${KEYMAP:-us}'...\n"
 loadkeys -q -u ${KEYMAP:-us}
 
-# This will load the systems internal Real-Time Clock to set up the internal clocks first.
-if [ -n "$HARDWARECLOCK" ]; then
-    msg "Setting up RTC to '${HARDWARECLOCK}'...\n"
-    TZ=$TIMEZONE hwclock --systz \
-        ${HARDWARECLOCK:+--$(echo $HARDWARECLOCK |tr A-Z a-z) --noadjfile}
+# Set the system clock from the hardware clock. 
+msg "Setting the system clock...\n"
+if [[ ${HARDWARECLOCK} = UTC || ${HARDWARECLOCK} = utc ]] ; then
+    HWC=$(echo $HARDWARECLOCK | tr A-Z a-z)
+    hwclock --hctosys --$HWC --noadjfile
+    echo "Using 'UTC' for the hardware clock..."
+else
+    # If HARDWARECLOCK is anything else, commented, or null, then use 'localtime' as the default...
+    HWC=localtime
+    hwclock --hctosys --$HWC --noadjfile
+    echo "Using 'localtime' for the hardware clock..."
 fi
 
 # Let's get udev started. This is the first pass for udev, so it should trigger any and all
@@ -121,7 +127,7 @@ ip link set up dev lo
 [ -r /etc/sysconfig/network ] && . /etc/sysconfig/network
 [ -r /etc/hostname ] && HOSTNAME=$(cat /etc/hostname)
 msg "Setting up hostname to '${HOSTNAME}'...\n"
-hostname ${HOSTNAME} &>/dev/null
+hostname ${HOSTNAME}
 
 # If we have any RAID devices, we'll now load them.
 if [ -x /usr/sbin/dmraid ]; then
@@ -158,8 +164,8 @@ mount -o remount,rw /
 # Start the system and kernel log daemons.
 parms=${SYSKLOGD_PARMS-'-m 0'}
 msg "Starting system and kernel log daemons...\n"
-syslogd $parms &>/dev/null
-klogd &>/dev/null
+syslogd $parms
+klogd
 
 # Any non-networked file systems will now be mounted.
 msg "Mounting all non-network filesystems...\n"
@@ -169,7 +175,7 @@ mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev
 msg "Cleaning up /tmp...\n"
 if ! is_true "$SKIPTMPCLEAN" ; then
     cd /tmp
-    find . -xdev -mindepth 1 ! -name lost+found -delete &>/dev/null
+    find . -xdev -mindepth 1 ! -name lost+found -delete
 fi
 
 # Create files and directories specified in an array in /etc/runit.conf.
@@ -192,8 +198,8 @@ msg "Processing /etc/sysconfig/udev_retry...\n"
 sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
 while read line ; do
    for subsystem in $line ; do
-      udevadm trigger --subsystem-match=$subsystem --action=add &>/dev/null
-      udevadm settle &>/dev/null      
+      udevadm trigger --subsystem-match=$subsystem --action=add
+      udevadm settle     
    done
 done
 
@@ -205,10 +211,11 @@ awk '$4==1 { system("mountpoint -q /sys/fs/cgroup/" $1 " || mount -t cgroup -o "
 msg "Initializing swap...\n"
 swapon -a
 
-# Let's set the time and update the system clock if required.
-if [ -n "$TIMEZONE" ]; then
-    msg "Setting up timezone to '${TIMEZONE}'...\n"
-    ln -sf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+# Set the time zone and update the system clock.
+if [ -n "$TIMEZONE" ] ; then
+   msg "Setting timezone to '${TIMEZONE}'...\n"
+   cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
+   TZ=$TIMEZONE hwclock --systz --$HWC --noadjfile
 fi
 
 # This will create an entropy file.

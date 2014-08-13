@@ -8,7 +8,6 @@
 
 SCRIPTS= 1 2 3 ctrlaltdel
 
-pushd ..
 install -dv /etc/sysconfig
 mkdir -pv /lib/services
 ln -sv /lib/services /lib/lsb
@@ -31,9 +30,9 @@ install -v -m 0644 rc.site /etc/sysconfig
 ln -sfv halt /sbin/poweroff
 ln -sfv halt /sbin/reboot
 install -v -m 0644 pause.1 /usr/share/man/man1
+install -v -m 0644 runit.conf.5 /usr/share/man/man5
 install -dv /etc/sv
 install -dv /etc/runit/runsvdir
 install -v -m 0755 ${SCRIPTS} /etc/runit
 install -v -m 0644 runit.conf /etc
 cp -aP services/* /etc/sv
-popd

@@ -33,14 +33,19 @@ base directory, we'll install Runit into the system:
   mkdir -pv /etc/sv
   mkdir -pv /etc/runit/runsvdir/single
   mkdir -pv /etc/runit/runsvdir/multi
-  mkdir -pv /etc/runit/runsvdir/current
-  ln -sv /etc/runit/runsvdir/current /var/service
   
 This should install all files to the proper locations.
 
-Now you'll want to install the service files. In the trunk directory issue:
+Now you'll want to install the service files. Navigate to /setup, and run the
+utilities inside as such:
 
-  make && make install
+./build.sh - This will build the sysvinit and service applets for Runit to work
+             from to handle shutdowns, reboots, etc.
+./install.sh - This will install all the appropriate files for runit-for-lfs
+               to their correct directories and locations.
+./remove.sh - This utility will remove all the runit-for-lfs files from the
+              system. This utility is also best ran when performing an upgrade
+              prior to reinstallation.
   
 Several binaries and scripts critical to the system controls will be installed:
 
@@ -66,10 +71,6 @@ Now to link a service into the execution path, issue something like this:
 If you are in (chroot):
 
   ln -sv /etc/sv/agetty-tty1 /etc/runit/runsvdir/multi
-  
-If you are the system itself:
-
-  ln -sv /etc/sv/dbus /var/service
   
 This will start a getty in multi-user mode. For any other services you'll issue
 a similar command in chroot.

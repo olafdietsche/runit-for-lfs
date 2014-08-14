@@ -12,8 +12,8 @@ SBINDIR = sbin
 SCRIPTS= 1 2 3 ctrlaltdel
 
 all:
-  $(CC) $(CFLAGS) -v halt.c -o halt
-  $(CC) $(CFLAGS) -v pause.c -o pause
+  ${CC} ${CFLAGS} -v halt.c -o halt
+  ${CC} ${CFLAGS} -v pause.c -o pause
   ${CC} ${CFLAGS} -v suspend.c -o suspend
   
 install:

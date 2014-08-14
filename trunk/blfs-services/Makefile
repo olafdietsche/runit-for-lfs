@@ -26,14 +26,6 @@ install-service-dhcpcd: create-service-dir
 install-service-bridge: create-service-dir
 	install -m ${MODE} blfs/services/bridge  ${LIBDIR}
 
-install-service-ipx: create-service-dir
-	install -m ${MODE} blfs/services/ipx ${LIBDIR}
-
-install-service-pppoe: create-service-dir
-	install -m ${MODE} blfs/services/pppoe  ${LIBDIR}
-	install -d -m ${DIRMODE} ${EXTDIR}/ppp/peers
-	install -m ${CONFMODE} blfs/ppp/pppoe ${EXTDIR}/ppp/peers
-
 install-service-wpa: create-service-dir
 	install -m ${MODE} blfs/services/wpa ${LIBDIR}
 
@@ -68,8 +60,6 @@ uninstall-slapd:
 	install-service-bridge \
 	install-service-dhclient \
 	install-service-dhcpcd \
-	install-service-ipx \
-	install-service-pppoe \
 	install-service-wpa \
 	install-autofs \
 	install-bluetooth \

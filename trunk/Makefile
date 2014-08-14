@@ -52,6 +52,9 @@ install:
   for N in 1 2 3 4 5 6; do
     ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty$N ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
   done
+  for N in 1 2 3 4 5 6 S0; do
+    chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty$N/*
+  done
   ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-ttyS0 ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
 
 clean:

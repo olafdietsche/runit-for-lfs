@@ -36,16 +36,9 @@ base directory, we'll install Runit into the system:
   
 This should install all files to the proper locations.
 
-Now you'll want to install the service files. Navigate to /setup, and run the
-utilities inside as such:
+To install runit-for-lfs, simply run:
 
-./build.sh - This will build the sysvinit and service applets for Runit to work
-             from to handle shutdowns, reboots, etc.
-./install.sh - This will install all the appropriate files for runit-for-lfs
-               to their correct directories and locations.
-./remove.sh - This utility will remove all the runit-for-lfs files from the
-              system. This utility is also best ran when performing an upgrade
-              prior to reinstallation.
+make && make install
   
 Several binaries and scripts critical to the system controls will be installed:
 
@@ -58,28 +51,6 @@ Several binaries and scripts critical to the system controls will be installed:
 
 Along with these, several key components of the LFS networking scripts will be
 installed as well.
-
-To use scripts. You must first make the script executable such as:
-
-  chmod +x /etc/sv/agetty-tty1/*
-  
-Note: Some services have a log run file as well so you would need to issue a
-      command for chmod +x on the run file of the log directory.
-      
-Now to link a service into the execution path, issue something like this:
-
-If you are in (chroot):
-
-  ln -sv /etc/sv/agetty-tty1 /etc/runit/runsvdir/multi
-  
-This will start a getty in multi-user mode. For any other services you'll issue
-a similar command in chroot.
-
-You'll need to at least assign multi the following:
-
-agetty-tty1~6
-
-Service agetty-ttyS0 must go into the /etc/runit/runsvdir/single prior to boot.
 
 ================================================================================
 

@@ -18,31 +18,31 @@ create-service-dir:
 	install -d -m ${DIRMODE} ${LIBDIR}
 
 install-service-dhclient: create-service-dir
-	install -m ${MODE} blfs/services/dhclient ${LIBDIR}
+	install -m ${MODE} services/dhclient ${LIBDIR}
 
 install-service-dhcpcd: create-service-dir
-	install -m ${MODE} blfs/services/dhcpcd  ${LIBDIR}
+	install -m ${MODE} services/dhcpcd  ${LIBDIR}
 
 install-service-bridge: create-service-dir
-	install -m ${MODE} blfs/services/bridge  ${LIBDIR}
+	install -m ${MODE} services/bridge  ${LIBDIR}
 
 install-service-wpa: create-service-dir
-	install -m ${MODE} blfs/services/wpa ${LIBDIR}
+	install -m ${MODE} services/wpa ${LIBDIR}
 
 install-autofs: create-dirs
-	install -m $(CONFMODE) blfs/sysconfig/autofs.conf $(EXTDIR)/sysconfig/
+	install -m $(CONFMODE) sysconfig/autofs.conf $(EXTDIR)/sysconfig/
 
 install-bluetooth: create-dirs
-	install -m ${CONFMODE} blfs/sysconfig/bluetooth ${EXTDIR}/sysconfig/bluetooth
+	install -m ${CONFMODE} sysconfig/bluetooth ${EXTDIR}/sysconfig/bluetooth
 
 install-saslauthd: create-dirs
-	install -m ${CONFMODE} blfs/sysconfig/saslauthd ${EXTDIR}/sysconfig/saslauthd
+	install -m ${CONFMODE} sysconfig/saslauthd ${EXTDIR}/sysconfig/saslauthd
 	
 install-dhcpd: create-dirs
-	install -m ${CONFMODE} blfs/sysconfig/dhcpd ${EXTDIR}/sysconfig/dhcpd
+	install -m ${CONFMODE} sysconfig/dhcpd ${EXTDIR}/sysconfig/dhcpd
 
 install-slapd: create-dirs
-	install -m ${CONFMODE} blfs/sysconfig/slapd ${EXTDIR}/sysconfig/slapd
+	install -m ${CONFMODE} sysconfig/slapd ${EXTDIR}/sysconfig/slapd
 
 uninstall-bluetooth:
 	rm -f ${EXTDIR}/sysconfig/bluetooth

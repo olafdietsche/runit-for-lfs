@@ -26,7 +26,6 @@ install:
       install -v -m 0755 suspend ${DESTDIR}/${SBINDIR}
       install -v -m 0755 ifup ${DESTDIR}/${SBINDIR}
       install -v -m 0755 ifdown ${DESTDIR}/${SBINDIR}
-      ln -svf suspend ${DESTDIR}/${SBINDIR}
       ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
       ln -svf halt ${DESTDIR}/${SBINDIR}/reboot
       install -dv ${DESTDIR}/${PREFIX}/share/man/man1

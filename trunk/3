@@ -19,8 +19,8 @@ fi
 # Runit uses a few minutes to bring down services, but unless totally necessary, the
 # system can be brought down very quickly in under 15 seconds. We'll use 10 as default.
 echo "Waiting for services to stop..."
-sv -w10 force-stop /var/service/*
-sv exit /var/service/*
+sv -w10 force-stop /etc/runit/runsvdir/current/*
+sv exit /etc/runit/runsvdir/current/*
 
 # Load the emergency superuser shell just case a failure arises.
 stty onlcr

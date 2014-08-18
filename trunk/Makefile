@@ -40,9 +40,6 @@ install:
       ln -sfv halt.8 ${DESTDIR}/${PREFIX}/share/man/man8/reboot.8
       install -v -m 0754 ipv4-static-route ${DESTDIR}/${LIBDIR}/services
       install -v -m 0754 ipv4-static ${DESTDIR}/${LIBDIR}/services
-      install -v -m 0644 createfiles ${DESTDIR}/${ETCDIR}/sysconfig
-      install -v -m 0644 udev_retry ${DESTDIR}/${ETCDIR}/sysconfig
-      install -v -m 0644 rc.site ${DESTDIR}/${ETCDIR}/sysconfig
       install -dv ${DESTDIR}/${ETCDIR}/sv
       install -dv ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
       install -dv ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi

@@ -15,7 +15,6 @@ unicode_start
 if [ ! -d /etc/runit/runsvdir/current ]; then
    pushd /etc/runit/runsvdir
    ln -s multi current
-   ln -s current /var/service
    popd
 fi
 

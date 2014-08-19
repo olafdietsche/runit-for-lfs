@@ -21,6 +21,15 @@ fi
 # Let runsvchdir select the default runlevel
 runsvchdir multi >/dev/null
 
+# If any legacy scripts exist in the system, use rc.local to start them
+# using this syntax:
+# if [ -<trigger> "</path/to/script>"; then
+#     </path/to/script> -<arguments>
+# fi
+# You can create a directory named /etc/rc.d for this purpose and store
+# and load them from there.
+[ -x /etc/rc.local ] && /etc/rc.local
+
 # Start all services detected in the current runlevel directory.
 exec env - PATH=$PATH \
 runsvdir /etc/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'

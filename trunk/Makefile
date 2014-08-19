@@ -84,9 +84,12 @@ uninstall-true:
       -rm -rvf ${DESTDIR}/${SBINDIR}/halt
       -rm -rvf ${DESTDIR}/${SBINDIR}/ifup
       -rm -rvf ${DESTDIR}/${SBINDIR}/ifdown
+      -rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static-route
+      -rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static
       -rm -rvf ${DESTDIR}/${PREFIX}/${BINDIR}/pause
       -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/ifdown.8
       -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/ifup.8
+      -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/halt.8      
       -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/poweroff.8
       -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/reboot.8
       -rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/shutdown.8

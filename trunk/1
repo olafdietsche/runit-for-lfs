@@ -143,10 +143,23 @@ if [ -x /usr/bin/btrfs ]; then
     btrfs device scan
 fi
 
-# Now we'll load any Logicial Volumes.
+# Now we'll load any Logical Volumes.
 if [ -x /usr/sbin/vgchange ]; then
     msg "Activating LVM devices...\n"
     vgchange --sysinit -a y
+fi
+
+# Now we'll load any encrypted devices.
+if [ -e /etc/crypttab ]; then
+    msg "Activating encrypted devices...\n"
+    awk '/^#/ || /^$/ { next }
+      NF>2 { print "unsupported crypttab: " $0 >"/dev/stderr"; next }
+      { system("cryptsetup luksOpen " $2 " " $1) }' /etc/crypttab
+      
+    if [ -x /sbin/vgchange ]; then
+        msg "Activating LVM devices for dm-crypt...\n"
+        vgchange --sysinit -a y || emergency_shell
+    fi
 fi
 
 # Let's check the file systems for any errors from a previous shutdown or reboot.

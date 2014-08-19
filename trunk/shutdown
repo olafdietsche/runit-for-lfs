@@ -25,10 +25,16 @@ shift $(expr $OPTIND - 1)
 time=$1; shift
 message="${*:-system is going down}"
 
+
 if [ "$action" = "cancel" ]; then
   kill $(cat /run/runit/shutdown.pid)
   echo "${*:-shutdown cancelled}" | wall
   exit
+fi
+
+if [ ! touch /run/runit/shutdown.pid 2>/dev/null]; then
+  echo "Not enough permissions to execute ${0#*/}"
+  exit 1
 fi
 
 echo $$ >/run/runit/shutdown.pid

@@ -65,7 +65,7 @@ base directory, we'll install Runit into the system:
   install runsvdir runsv chpst svlogd sv /usr/bin
   install runsvchdir utmpset /usr/sbin
   cp ../man/* /usr/share/man/man8
-  ln -s /sbin/runit-init /sbin/init
+  ln -svf /sbin/runit-init /sbin/init
   mkdir -pv /etc/sv
   mkdir -pv /etc/runit/runsvdir/single
   mkdir -pv /etc/runit/runsvdir/multi

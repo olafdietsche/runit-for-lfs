@@ -108,7 +108,7 @@ fi
 # devices during this stage, if it doesn't the second pass will pick up anything else not
 # properly loaded.
 if [ -x /usr/sbin/udevd ]; then
-    _udevd=/sbin/udevd
+    _udevd=/usr/sbin/udevd
 else
     msg_warn "cannot find udevd!\n"
 fi

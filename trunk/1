@@ -42,8 +42,8 @@ msg "Welcome to Linux From Scratch! \n"
 . /etc/runit.conf
 
 # The LFS rc.site file contains parameters and system variables that can customize various
-# aspects of the boot process.
-. /etc/sysconfig/rc.site
+# aspects of the boot process. Source it now if it exists. Otherwise, defaults will be used.
+if [ -r /etc/sysconfig/rc.site ] && . /etc/sysconfig/rc.site
 
 # A function from init-functions.
 is_true()
@@ -65,6 +65,11 @@ mountpoint -q /dev || mount /dev
 ln -sfn /run/shm /dev/shm
 mkdir -p -m0755 /dev/pts
 mountpoint -q /dev/pts || mount /dev/pts
+
+# Set the console log verbosity level using LOGLEVEL in /etc/sysconfig/rc.site. If LOGLEVEL
+# is null or unset use the default of 4.
+msg "Setting console log level...\n"
+dmesg -n "${LOGLEVEL:-4}"
 
 # Let's get root mounted at least in read-only for now.
 msg "Remounting rootfs read-only...\n"
@@ -174,7 +179,8 @@ fi
 msg "Mounting rootfs read-write...\n"
 mount -o remount,rw /
 
-# Start the system and kernel log daemons.
+# Start the system and kernel log daemons using SYSKLOGD_PARMS in /etc/sysconfig/rc.site. If
+# SYSKLOGD_PARMS is null or unset use a default.
 parms=${SYSKLOGD_PARMS-'-m 0'}
 msg "Starting system and kernel log daemons...\n"
 syslogd $parms
@@ -184,7 +190,7 @@ klogd -c 3
 msg "Mounting all non-network filesystems...\n"
 mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev
 
-# Clean /tmp.
+# Clean /tmp. Skip this if SKIPTMPCLEAN in /etc/sysconfig/rc.site is true.
 msg "Cleaning up /tmp...\n"
 if ! is_true "$SKIPTMPCLEAN" ; then
     cd /tmp

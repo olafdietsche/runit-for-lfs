@@ -61,10 +61,10 @@ This will build all the relevant software and manpages. Now while in the runit-2
 base directory, we'll install Runit into the system:
 
   cd command
-  install runit runit-init /sbin
-  install runsvdir runsv chpst svlogd sv /usr/bin
-  install runsvchdir utmpset /usr/sbin
-  cp ../man/* /usr/share/man/man8
+  install -v runit runit-init /sbin
+  install -v runsvdir runsv chpst svlogd sv /usr/bin
+  install -v runsvchdir utmpset /usr/sbin
+  cp -v ../man/* /usr/share/man/man8
   ln -svf /sbin/runit-init /sbin/init
   mkdir -pv /etc/sv
   mkdir -pv /etc/runit/runsvdir/single

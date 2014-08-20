@@ -43,7 +43,7 @@ msg "Welcome to Linux From Scratch! \n"
 
 # The LFS rc.site file contains parameters and system variables that can customize various
 # aspects of the boot process. Source it now if it exists. Otherwise, defaults will be used.
-if [ -r /etc/sysconfig/rc.site ] && . /etc/sysconfig/rc.site
+[ -r /etc/sysconfig/rc.site ] && . /etc/sysconfig/rc.site
 
 # A function from init-functions.
 is_true()

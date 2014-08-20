@@ -45,9 +45,9 @@ case "${2}" in
       if [ "$(ip addr show ${1} 2>/dev/null | grep ${IP}/)" = "" ]; then
          
          # Cosmetic output not needed for multiple services
-         if ! $(echo ${SERVICE} | grep -q " "); then 
-           echo "" # Terminate the previous message
-         fi
+         #if ! $(echo ${SERVICE} | grep -q " "); then 
+         #  echo "" # Terminate the previous message
+         #fi
          
          echo "Adding IPv4 address ${IP} to the ${1} interface..."
          ip addr add ${args} dev ${1}

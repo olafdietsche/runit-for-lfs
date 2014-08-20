@@ -22,9 +22,6 @@ echo "Waiting for services to stop..."
 sv -w10 force-stop /etc/runit/runsvdir/current/*
 sv exit /etc/runit/runsvdir/current/*
 
-# Load the emergency superuser shell just case a failure arises.
-stty onlcr
-
 # This will stop and bring down the network interfaces.
 for file in  /etc/sysconfig/ifconfig.*
 do

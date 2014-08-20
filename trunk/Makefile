@@ -77,6 +77,7 @@ uninstall-true:
       -rm -rvf ${DESTDIR}/${ETCDIR}/runit.conf
       -rm -rvf ${DESTDIR}/${ETCDIR}/sv
       -rm -rvf ${DESTDIR}/${ETCDIR}/runit
+      -rm -rvf ${DESTDIR}/${ETCDIR}/rc.local
       -rm -rvf ${DESTDIR}/${SBINDIR}/poweroff
       -rm -rvf ${DESTDIR}/${SBINDIR}/reboot
       -rm -rvf ${DESTDIR}/${SBINDIR}/suspend

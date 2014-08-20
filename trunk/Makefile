@@ -53,6 +53,7 @@ install:
       ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty5 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
       ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty6 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
       ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-ttyS0 ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
+      ln -sfv ${DESTDIR}/${ETCDIR}/sv/sulogin ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty1/*
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty2/*
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty3/*
@@ -60,6 +61,7 @@ install:
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty5/*
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty6/*
       chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-ttyS0/*
+      chmod +x ${DESTDIR}/${ETCDIR}/sv/sulogin/*
 
 clean:
       -rm -vf halt pause suspend

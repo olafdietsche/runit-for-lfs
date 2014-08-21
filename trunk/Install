@@ -88,6 +88,10 @@ Several binaries and scripts critical to the system controls will be installed:
 Along with these, several key components of the LFS networking scripts will be
 installed as well.
 
+Also, if you have any legacy sysvinit scripts, you may drop them into the
+/etc/runit/rc.d folder and create an entry in /etc/rc.local for them to work
+from.
+
 ================================================================================
 
 Description of application files:

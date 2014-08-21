@@ -67,11 +67,11 @@ clean:
 
 uninstall:
 	$(info WARNING!!! CAUTION!!! STOOOOP!!! DONT DO IT STUPID!!!)
-	
+	$(info)
 	$(info Uninstallation outside of chroot is not advised!!!)
 	$(info Please use chroot from a host to use the uninstall)
 	$(info or you may be left with a non-operable system!!!)
-	
+	$(info)
 	$(info Please enter chroot first and run make uninstall-true.)
 
 uninstall-true:

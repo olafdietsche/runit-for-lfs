@@ -1,6 +1,3 @@
-[ ] - Create directory check and creation triggers for logging run files. For the initial
-      system we used a script to auto-create the directories upon install. This could also
-      be done via the Makefile.
 [ ] - Create/Import run service files for the following services:
           [ ] - dovecot
           [ ] - haveged
@@ -27,17 +24,12 @@
 [ ] - Clean up pid files to move system services into dedicated pipes.
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS.
-[ ] - Rewrite Makefile into separated scripts:
-	install.sh
-	build.sh
-	remove.sh
 [ ] - Fix Networking table up for error handling.
-[ ] - Add CleanFS handler to stage-1.
-[ ] - Check rc.site file for needed cutomizations.
-[ ] - Add msg_fail and msg_ok triggers as needed.
+[x] - Add CleanFS handler to stage-1.
+[x] - Add msg_fail and msg_ok triggers as needed.
 [x] - Add Stage 3 Network Shutdown section.
-[ ] - Thoroughly test Makefile. Several "install" paths accidentally were not working.
-[ ] - Remove all required instances of reference and usage of /lib/lsb/init-functions. This
+[x] - Thoroughly test Makefile. Several "install" paths accidentally were not working.
+[x] - Remove all required instances of reference and usage of /lib/lsb/init-functions. This
       was left over from sysvinit and isn't needed by Runit.
 [x] - Remove sulogin service. This service is pointless for our implementation and only
       introduces a further headache on the system by forcing the user to login multiple times
@@ -52,13 +44,18 @@ The following files are deprecated and do not need to be included and are going 
 during the next cycle I'm accessing the SVN directly.
 
 [x] modules - Was determined it was unnecessary.
-[ ] init-functions - Was a hold over from sysvinit. No longer needed and scripts requiring
+[x] init-functions - Was a hold over from sysvinit. No longer needed and scripts requiring
     function calls to are are now removed and edited.
 [x] blfs-services/pppoe and pppoe lsb script - The BLFS project removed them a long time ago
     and the maintainers have said they were up to be removed as well.
 [x] blfs-services ipx lsb script - BLFS project removed this as well. Considering how old
     IPX is as a protocol, I'm not surprised as barely anything would even begin to use it
     any longer.
-[x] services/sulogin - After testing, I determined this script was pointless. sulogin is
-    already handled by the system as it is. The service run files are redundant, and break
-    the shell job control functions.
+    
+Other things to consider:
+
+[ ] - Create Changelog for initial release.
+[ ] - Imported rc.local script to handle custom services not covered by Runit yet in the system.
+      This is a temporary measure, but I plan to keep it. Many services such as the one's listed
+      above can be started using a trigger set in rc.local similar to how Slackware Linux
+      performs a scan for and load of service files if they are found in the system.

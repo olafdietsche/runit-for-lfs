@@ -92,6 +92,15 @@ Also, if you have any legacy sysvinit scripts, you may drop them into the
 /etc/runit/rc.d folder and create an entry in /etc/rc.local for them to work
 from.
 
+Lastly, most LFS systems have a udev rule that runs the LFS setclock initscript at 
+boot time. That rule needs to be disabled to prevent udev from continuing to try to 
+run setclock. Even if you did not uninstall LFS-bootscripts as recommended above, 
+this udev rule still needs to be disabled to prevent an error message on the console 
+during booting. Our Runit project handles the system and hardware clocks through a
+different method. As root...
+
+  sed -i '/setclock\ start/ s/^/#/' /etc/udev/rules.d/55-lfs.rules
+
 ================================================================================
 
 Description of application files:

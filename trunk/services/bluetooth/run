@@ -1,12 +1,9 @@
 #!/bin/sh
 exec 2>&1
-#Begin bluetooth service run file
 HIDD_ENABLE="false"
 PAND_ENABLE="false"
 DUND_ENABLE="false"
-
 RFCOMM_ENABLE="false"
-
 HIDD_OPTIONS=""
 PAND_OPTIONS=""
 DUND_OPTIONS=""
@@ -28,5 +25,3 @@ if [ "$DUND_ENABLE" = "true" ]; then
 fi
 
 exec /usr/sbin/bluetoothd -n -d 2>&1
-
-#End of bluetooth service run file

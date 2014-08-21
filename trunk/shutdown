@@ -15,8 +15,8 @@ while getopts akrhPHfFnct: opt; do
     F) touch /forcefsck;;
     k) action=true;;
     c) action=cancel;;
-    h|P) action=halt;;
-    r) action=reboot;;
+    h|P) action=/sbin/halt;;
+    r) action=/sbin/reboot;;
     [?]) echo "Usage: shutdown [-fF] [-kchPr] time [warning message]" >/dev/stderr; exit 1;;
   esac
 done
@@ -27,17 +27,17 @@ message="${*:-system is going down}"
 
 
 if [ "$action" = "cancel" ]; then
-  kill $(cat /run/runit/shutdown.pid)
+  kill $(cat /run/shutdown.pid)
   echo "${*:-shutdown cancelled}" | wall
   exit
 fi
 
-if ! touch /run/runit/shutdown.pid 2>/dev/null; then
+if ! touch /run/shutdown.pid 2>/dev/null; then
   echo "Not enough permissions to execute ${0#*/}"
   exit 1
 fi
 
-echo $$ >/run/runit/shutdown.pid
+echo $$ >/run/shutdown.pid
 
 case "$time" in
   now) time=0;;

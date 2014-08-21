@@ -1,2 +1,5 @@
 #!/bin/sh
+if [ ! -d /var/log/postgresql ] ; then
+   mkdir /var/log/postgresql
+fi
 exec /usr/sbin/svlogd -tt /var/log/postgresql

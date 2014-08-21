@@ -1,4 +1,2 @@
 #!/bin/sh
-# Begin fcron service run file
 exec fcron -f
-# End of fcron service run file

@@ -1,2 +1,5 @@
 #!/bin/sh
-exec /usr/bin/svlogd -tt /var/log/openssh
+if [ -d /var/log/sshd ]; then
+    mkdir -p /varlog/sshd
+fi
+exec /usr/bin/svlogd -tt /var/log/sshd

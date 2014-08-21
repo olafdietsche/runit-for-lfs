@@ -66,7 +66,7 @@ clean:
 	-rm -vf halt pause suspend
 
 uninstall:
-	$(info WARNING!!! CAUTION!!! STOOOOP!!! DON'T DO IT STUPID!!!)
+	$(info WARNING!!! CAUTION!!! STOOOOP!!! DONT DO IT STUPID!!!)
 	
 	$(info Uninstallation outside of chroot is not advised!!!)
 	$(info Please use chroot from a host to use the uninstall)

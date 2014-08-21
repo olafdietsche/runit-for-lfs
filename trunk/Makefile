@@ -40,6 +40,7 @@ install:
       install -v -m 0754 ipv4-static-route ${DESTDIR}/${LIBDIR}/services
       install -v -m 0754 ipv4-static ${DESTDIR}/${LIBDIR}/services
       install -dv ${DESTDIR}/${ETCDIR}/sv
+      install -dv ${DESTDIR}/${ETCDIR}/runit/rc.d
       install -dv ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
       install -dv ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
       install -v -m 0755 ${SCRIPTS} ${DESTDIR}/${ETCDIR}/runit

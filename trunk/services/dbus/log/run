@@ -1,4 +1,5 @@
 #!/bin/sh
-# Begin D-Bus Message Bus log service file
+if [ ! -d /var/log/dbus ] ; then
+   mkdir /var/log/dbus
+fi
 exec /usr/bin/svlogd -tt /var/log/dbus
-# End of D-Bus Message Bus log service file

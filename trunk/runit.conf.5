@@ -14,7 +14,6 @@ Runit will use this variable to tell the hwclock program whether the hardware cl
 The only valid entries for HARDWARECLOCK are 'UTC' and 'localtime'. If HARDWARECLOCK is commented or does not contain a valid entry, Runit will default to 'localtime' which may or may not be appropriate.
 .PP
 .B TIMEZONE
-= <time zone>
 .PP
 Runit uses this variable to set the time zone for the system. When the hardware clock is using UTC, the time zone information is used to apply the appropriate hour offset to Greenwich Mean Time (GMT) for the system to display the correct local time. It also is important for Daylight Savings Time. The hwclock program uses TIMEZONE to set the TZ environment variable and the kernel time zone. The stage 1 script uses TIMEZONE to copy the appropriate time zone data file from /usr/share/zoneinfo to /etc/localtime.
 .PP
@@ -25,6 +24,26 @@ for TIMEZONE. Example...
 .RS
 TIMEZONE=America/New_York
 .RE
+.PP
+.B KEYMAP
+.PP
+This variable contains the name of the keymap for the loadkeys program to load. The setting is important when a non-US keyboard is being used or when a custom keymap file has been created. If KEYMAP is null or not set, then the default KEYMAP (us) will be loaded. See the loadkeys man page for more information about keymaps.
+.PP
+.B FONT
+.PP
+This variable is used to by the setfont program to load a console font. If FONT is null or not set, then a default font will be used. See the setfont man page for more information about console fonts.
+.PP
+.B FONT_MAP
+.PP
+Used only when a FONT variable is specified, this variable is used to by the setfont program to load a console map. If FONT_MAP is null or not set, then Runit does not use this option with setfont. See the setfont man page for more information about console fonts.
+.PP
+.B FONT_UNIMAP
+.PP
+Use only when a FONT variable is specified, and usually not needed even then, this variable is used to by the setfont program to load a Unicode map table when needed. If FONT_UNIMAP is null or not set, then Runit does not use this option with setfont. See the setfont man page for more information about console fonts.
+.PP
+.B MODULES
+.PP
+This is a variable containing modules to be loaded by the kernel. If a kernel module is needed but is not being automatically loaded, try listing it here. Multiple modules separated by a space can be entered.
 .PP
 .B CREATEFILES
 .PP
@@ -50,4 +69,3 @@ Arthur Radley
 <MisterArthurRadley@aol.com>
 .SH "REPORTING BUGS"
 Please send bug reports to <MisterArthurRadley@aol.com>
-

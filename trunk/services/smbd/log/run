@@ -1,2 +1,5 @@
 #!/bin/sh
+if [ ! -d /var/log/smbd ] ; then
+   mkdir /var/log/smbd
+fi
 exec /usr/sbin/svlogd -tt /var/log/smbd

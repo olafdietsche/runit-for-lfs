@@ -15,7 +15,7 @@
           [ ] - slapd
           [ ] - soprano
           [ ] - stunnel
-          [ ] - svn
+          [x] - svn
           [ ] - swat
           [ ] - sysstat
           [ ] - virtuoso

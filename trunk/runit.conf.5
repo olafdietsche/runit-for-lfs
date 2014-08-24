@@ -11,7 +11,7 @@ is a configuration file used to set parameters and variables for various scripts
 .PP
 Runit will use this variable to tell the hwclock program whether the hardware clock is set to Coordinated Universal Time (UTC) or local time. No other method exists for programs to determine what time system the hardware clock is using. So this variable must be set appropriately for the hardware and system clocks to be set to the correct time during booting and shutting down.
 .PP
-The only valid entries for HARDWARECLOCK are 'UTC' and 'localtime'. If HARDWARECLOCK is commented or does not contain a valid entry, Runit will default to 'localtime' which may or may not be appropriate.
+The only valid entries for HARDWARECLOCK are "UTC" and "localtime". If HARDWARECLOCK is commented or does not contain a valid entry, Runit will default to "localtime" which may or may not be appropriate.
 .PP
 .B TIMEZONE
 .PP
@@ -19,11 +19,7 @@ Runit uses this variable to set the time zone for the system. When the hardware 
 .PP
 Possible entries for this variable are found in /usr/share/zoneinfo. Use the tzselect utility for help in determining what to enter in
 .B runit.conf
-for TIMEZONE. Example...
-.PP
-.RS
-TIMEZONE=America/New_York
-.RE
+for TIMEZONE. If TIMEZONE is commented or null, Runit will default to "America/New_York".
 .PP
 .B KEYMAP
 .PP

@@ -184,7 +184,7 @@ mount -o remount,rw /
 parms=${SYSKLOGD_PARMS-'-m 0'}
 msg "Starting system and kernel log daemons...\n"
 syslogd $parms
-klogd -c 3
+klogd
 
 # Any non-networked file systems will now be mounted.
 msg "Mounting all non-network filesystems...\n"

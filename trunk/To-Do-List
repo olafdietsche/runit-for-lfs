@@ -2,7 +2,7 @@
           [ ] - dovecot
           [ ] - haveged
           [ ] - heimdal
-          [ ] - iptables-ipv4
+          [x] - iptables-ipv4
           [ ] - iptables-ipv6
           [ ] - krb5
           [ ] - netfs

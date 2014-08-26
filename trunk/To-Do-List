@@ -55,7 +55,7 @@ during the next cycle I'm accessing the SVN directly.
 Other things to consider:
 
 [ ] - Create Changelog for initial release.
-[ ] - Imported rc.local script to handle custom services not covered by Runit yet in the system.
+[x] - Imported rc.local script to handle custom services not covered by Runit yet in the system.
       This is a temporary measure, but I plan to keep it. Many services such as the one's listed
       above can be started using a trigger set in rc.local similar to how Slackware Linux
       performs a scan for and load of service files if they are found in the system.

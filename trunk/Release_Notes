@@ -1,51 +1,54 @@
 Thanks for downloading our project and using Runit as your init of choice
-for LinuxFromScratch. A lot of hard work has gone into this project since
-it's original inception on the LinuxQuestions forums as a way to import a
-new and fresh init and service management system into LinuxFromScratch.
+for Linux From Scratch. A lot of hard work has gone into this project since
+its original inception on the LinuxQuestions forums as a way to import a
+new and fresh init and service management system into Linux From Scratch.
 
 We've accomplished a lot thanks to many people who donated and allowed us
 to use code and gave support. Thanks to many people we are at our first
 official release as of 8-21-2014.
 
-This imeplementation comprises of:
+This implementation is comprised of:
 
 RTM Release - 20140821
 
-- Complete rewrite of the Stage scripts using the method of Arch Ignite
-  monolithic bootscript design. We originally used the bazzar style with
+- Complete rewrite of the stage scripts using the method of Arch Ignite's
+  monolithic bootscript design. We originally used the bazaar style with
   external scripts, but found a single script was easier to maintain and
-  overtly debug in the end.
+  debug in the end.
   
-- Our scripts have officially deprecated a lot of the old init works from
-  the LFS-bootscripts and blfs-bootscripts that used the sysv init-functions
-  file. This includes rc.site, init-functions, createfiles, udev_retry, and
-  a few others, but the deprecation was minimal. Most of the setup done by
-  rc.site is now in /etc/runit.conf.
-  
+- Our scripts have deprecated many of the init components from lfs-bootscripts 
+  and blfs-bootscripts. These include init-functions, createfiles, modules, 
+  clock, and a few others. In our Runit system, many of the functions of 
+  those files are done by runit.conf or by the stages. Other traditional 
+  init components still used by our Runit system have been modified not to 
+  rely on init-functions (e.g., ipv4-static, ipv4-static-route, ifup, ifdown).
+  And still others will be sourced for certain user-set parameters if they 
+  exist (e.g., rc.site), otherwise our built-in defaults will be used.
+
 - We also include a makeshift rc.local script to launch any legacy scripts
   and services prior to the services loading within Stage 2. Because runit
-  is backwards compatible with system v scripting, we can effectively use
-  legacy scripts and handlers to launch services. Do take in mind any
-  references to init-functions used by sysvinit will have to be removed and
-  replaced. It's best to just use the command path with an echo message to
-  launch a service. As more runscripts become available, you may need this
-  file less and less.
+  is backwards compatible with System V scripting, we can effectively use
+  legacy scripts and handlers to launch services. Do keep in mind any
+  references to init-functions in Sysvinit scripts will have to be removed. 
+  It's best to just use the command path with an echo message to launch a 
+  service. As more runscripts become available, you may need this file less 
+  and less.
   
 - The package is centered around the release of Runit 2.1.1 or later versions.
 
-- We also have reimplemented several utilities donated to various Runit using
-  distributions to perform sysv-like clones of shutdown, halt, and suspend.
+- We also have reimplemented several utilities donated to various Runit-using
+  distributions to function as SysV-like clones of shutdown, halt, and suspend.
   These files should assist greatly in compatibility with Desktop Environments
   and Window Managers.
   
 - By default our system comes with two runlevels Single (for admin purposes only),
-  and Multi (for general usage). You are free to add how many runlevels you like
+  and Multi (for general usage). You are free to add as many runlevels you like
   to Runit. For more information on that, visit: http://smarden.org/runit/runlevels.html
   and read Gerrit Pape's documentation.
   
 - Our Stage 1 script supports far more than the typical LFS bootscript package
   and includes support for BtrFS partitions, network file systems, CGroups, and
-  various other out of the oridinary support vectors usually found on big name
+  various other out-of-the-ordinary support vectors usually found on big name
   distributions.
   
-Thank you all for your support, and well wishes in our endeavour.
+Thank you all for your support, and well wishes in our endeavor.

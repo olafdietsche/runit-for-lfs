@@ -404,7 +404,7 @@ Directories:
    /etc/runit/runsvdir/multi
 
    The default runlevel for this runit-for-lfs project that contains symlinks
-   to agetting services and all other services that should be running at all
+   to agetty services and all other services that should be running at all
    times.
 
    /etc/runit/rc.d

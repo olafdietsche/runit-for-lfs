@@ -57,7 +57,7 @@ Now we'll build the package using this command:
 
   package/compile
   
-This will build all the relevant software and manpages. Now while in the runit-2.1.1
+This will build all the relevant software and manpages. Now while in the runit-2.1.2
 base directory, we'll install Runit into the system:
 
   cd command
@@ -102,7 +102,7 @@ the hardware and system clocks by another method. As root...
 
 Description of application files:
 
-runit - It performs the system?s booting, running, and shutdown in three stages.
+runit - It performs the system's booting, running, and shutdown in three stages.
 
 runit-init - The first process the kernel starts.
 

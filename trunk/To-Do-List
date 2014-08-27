@@ -1,6 +1,6 @@
 [ ] - Create/Import run service files for the following services:
           [x] - dovecot
-          [ ] - haveged
+          [x] - haveged
           [ ] - heimdal
           [x] - iptables-ipv4
           [ ] - iptables-ipv6

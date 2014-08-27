@@ -8,7 +8,7 @@
           [ ] - netfs
           [ ] - nfs-client
           [ ] - nfs-server
-          [ ] - qpopper
+          [x] - qpopper & qpopper-ssl
           [ ] - rsyncd
           [ ] - saslauthd
           [ ] - sendmail

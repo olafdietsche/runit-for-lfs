@@ -1,3 +1,13 @@
+[ ] - Log files for Runit should be ran using chpst with this syntax:
+
+      #!/bin/sh
+      if [ -d </path/to/log/directory> ]; then
+        mkdir -p </path/to/log/directory>
+      fi
+      exec chpst -ulog svlogd -tt </path/to/log/directory>
+      
+      We shouldn't have to directly call svlogd.
+
 [ ] - Create/Import run service files for the following services:
           [x] - dovecot
           [x] - haveged
@@ -19,7 +29,7 @@
           [ ] - swat
           [ ] - sysstat
           [ ] - virtuoso
-          [ ] - vsftpd
+          [x] - vsftpd
           [ ] - winbindd
 [ ] - Clean up pid files to move system services into dedicated pipes.
 [ ] - Create/Import any service run files not in forementioned list that could be useful

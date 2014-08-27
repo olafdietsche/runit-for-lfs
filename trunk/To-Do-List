@@ -1,5 +1,5 @@
 [ ] - Create/Import run service files for the following services:
-          [ ] - dovecot
+          [x] - dovecot
           [ ] - haveged
           [ ] - heimdal
           [x] - iptables-ipv4

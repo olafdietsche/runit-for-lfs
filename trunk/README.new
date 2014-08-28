@@ -214,6 +214,40 @@ to create a run script for it following some of the existing run scripts as
 examples. Often a single command to start the daemon is all that is needed.
 
 
+Shutting Down, Rebooting, Suspending
+------------------------------------
+When runit-for-lfs is installed, the instructions in the INSTALL file remove
+SysVinit and lfs-bootscripts. Some of the removed components have to do with
+shutting down and rebooting. Runit is perfectly capable of doing those actions
+on its own. However, during the installation of runit-for-lfs, some of those
+uninstalled SysVinit components are replaced by special new versions of them
+for compatibility purposes and for users who like using them.
+
+halt
+
+   From Void Linux, this binary executable provides the functions of SysVinit's
+   halt program. See the halt man page.
+
+shutdown
+
+   From Void Linux, this is a bash script that mimics the function of SysVinit's
+   shutdown program. See the shutdown man page.
+
+poweroff
+
+   This is a symlink to halt to reproduce the action of the same symlink used by
+   SysVinit. See the halt man page.
+
+reboot
+
+   This is a symlink to halt to reproduce the action of the same symlink used by
+   SysVinit. See the halt man page.
+
+suspend
+
+   From Void Linux, this is a simple binary executable for suspending to RAM.
+
+
 A Word About Pause
 ------------------
 From Void Linux, the pause binary is an executable that is normally called from

@@ -23,6 +23,7 @@ install:
 	install -v -m 0755 halt ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 pause ${DESTDIR}/${PREFIX}/${BINDIR}
 	install -v -m 0755 shutdown ${DESTDIR}/${SBINDIR}
+	install -v -m 0755 hibernate ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 suspend ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifup ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifdown ${DESTDIR}/${SBINDIR}

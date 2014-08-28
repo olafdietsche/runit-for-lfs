@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Copyright 2014 James Powell, Arthur Radley, and Herman Dickerson.
+# This code contains samples contributed by Herman Dickerson for the
+# LFS-Runit project. All rights are reserved and licensed as such per
+# the project license as well as original authors.
+#
+# mailforhsd <at> aol <dot> com
+
+# Low-level hibernation mode
+
+# Check for root privileges...
+if [ $EUID -ne 0 ]; then
+   echo "Must be run as root. Exiting."
+   exit 1
+fi
+
+# Suspend to Disk if possible...
+if [[ -n $(cat /sys/power/state | grep disk) ]] ; then
+   echo -n disk > /sys/power/state
+else
+   echo "Hibernation not available. Exiting."
+fi
+
+exit 0

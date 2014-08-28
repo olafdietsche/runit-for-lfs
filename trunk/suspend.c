@@ -81,6 +81,10 @@ exit(EXIT_FAILURE);
 if (mode & MODE_RAM) {
 fputs("mem", f);
 }
+if ((f = fopen("/sys/power/disk", "w")) == NULL) {
+perror("cannot open /sys/power/disk");
+exit(EXIT_FAILURE);
+}
 if (mode & MODE_DISK) {
 fputs("disk", f);
 }

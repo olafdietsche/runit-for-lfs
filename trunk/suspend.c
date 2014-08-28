@@ -60,6 +60,9 @@ fgets(v, sizeof(v), f);
 fclose(f);
 if (strstr(v, "mem"))
 mode |= MODE_RAM;
+if ((f = fopen(SYS_DISK, "r"))) {
+fgets(v, sizeof(v), f);
+fclose(f);
 if (strstr(v, "disk"))
 mode |= MODE_DISK;
 }
@@ -77,7 +80,8 @@ exit(EXIT_FAILURE);
 }
 if (mode & MODE_RAM) {
 fputs("mem", f);
-} else {
+}
+if (mode & MODE_DISK) {
 fputs("disk", f);
 }
 fclose(f);

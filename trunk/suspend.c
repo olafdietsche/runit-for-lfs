@@ -60,9 +60,6 @@ fgets(v, sizeof(v), f);
 fclose(f);
 if (strstr(v, "mem"))
 mode |= MODE_RAM;
-if ((f = fopen(SYS_DISK, "r"))) {
-fgets(v, sizeof(v), f);
-fclose(f);
 if (strstr(v, "disk"))
 mode |= MODE_DISK;
 }
@@ -80,12 +77,7 @@ exit(EXIT_FAILURE);
 }
 if (mode & MODE_RAM) {
 fputs("mem", f);
-}
-if ((f = fopen("/sys/power/disk", "w")) == NULL) {
-perror("cannot open /sys/power/disk");
-exit(EXIT_FAILURE);
-}
-if (mode & MODE_DISK) {
+} else {
 fputs("disk", f);
 }
 fclose(f);

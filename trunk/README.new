@@ -1,4 +1,4 @@
-runit-for-lfs                  Version 1.0                   August 25, 2014
+runit-for-lfs                  Version 1.0                   August 29, 2014
 ============================================================================
 
 Runit is a mature and proven cross-platform init system for Unix/Linux that
@@ -214,8 +214,8 @@ to create a run script for it following some of the existing run scripts as
 examples. Often a single command to start the daemon is all that is needed.
 
 
-Shutting Down, Rebooting, Suspending
-------------------------------------
+Shutting Down and Rebooting
+---------------------------
 When runit-for-lfs is installed, the instructions in the INSTALL file remove
 SysVinit and lfs-bootscripts. Some of the removed components have to do with
 shutting down and rebooting. Runit is perfectly capable of doing those actions
@@ -242,10 +242,6 @@ reboot
 
    This is a symlink to halt to reproduce the action of the same symlink used by
    SysVinit. See the halt man page.
-
-suspend
-
-   From Void Linux, this is a simple binary executable for suspending to RAM.
 
 
 A Word About Pause
@@ -398,10 +394,6 @@ Additional custom executables:
 
    From Void Linux, a custom bash script to mimic the traditional function of
    shutdown for compatibility purposes. See man shutdown.
-
-   /sbin/suspend
-
-   From Void Linux, a simple binary executable for suspending.
 
    /bin/pause
 

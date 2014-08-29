@@ -2,4 +2,4 @@
 if [ ! -d /var/log/smartd ] ; then
    mkdir /var/log/smartd
 fi
-exec /usr/bin/svlogd -tt /var/log/smartd
+exec chpst -ulog svlogd -tt /var/log/smartd

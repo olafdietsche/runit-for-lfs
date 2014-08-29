@@ -2,4 +2,4 @@
 if [ ! -d /var/log/bluetooth ] ; then
    mkdir /var/log/bluetooth
 fi
-exec /usr/sbin/svlogd -tt /var/log/bluetooth
+exec chpst -ulog svlogd -tt /var/log/bluetooth

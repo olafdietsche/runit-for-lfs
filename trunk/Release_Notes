@@ -5,11 +5,11 @@ new and fresh init and service management system into Linux From Scratch.
 
 We've accomplished a lot thanks to many people who donated and allowed us
 to use code and gave support. Thanks to many people we are at our first
-official release as of 8-21-2014.
+official release as of 8-29-2014.
 
 This implementation is comprised of:
 
-RTM Release - 20140821
+RTM Release - 20140829
 
 - Complete rewrite of the stage scripts using the method of Arch Ignite's
   monolithic bootscript design. We originally used the bazaar style with

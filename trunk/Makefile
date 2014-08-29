@@ -95,5 +95,5 @@ uninstall-true:
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/shutdown.8
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man5/runit.conf.5
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man1/pause.1
-    
+
 .PHONY : all install clean uninstall uninstall-true

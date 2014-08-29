@@ -14,7 +14,6 @@ SCRIPTS= 1 2 3 ctrlaltdel
 all:
 	${CC} ${CFLAGS} -v halt.c -o halt
 	${CC} ${CFLAGS} -v pause.c -o pause
-	${CC} ${CFLAGS} -v suspend.c -o suspend
 
 install:
 	install -dv ${DESTDIR}/${ETCDIR}/sysconfig
@@ -23,8 +22,6 @@ install:
 	install -v -m 0755 halt ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 pause ${DESTDIR}/${PREFIX}/${BINDIR}
 	install -v -m 0755 shutdown ${DESTDIR}/${SBINDIR}
-	install -v -m 0755 hibernate ${DESTDIR}/${SBINDIR}
-	install -v -m 0755 suspend ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifup ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifdown ${DESTDIR}/${SBINDIR}
 	ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
@@ -67,7 +64,7 @@ clean:
 	-rm -vf halt pause suspend
 
 uninstall:
-	$(info WARNING!!! CAUTION!!! STOOOOP!!! DONT DO IT STUPID!!!)
+	$(info WARNING!!! CAUTION!!! STOP!!! CEASE!!!)
 	$(info)
 	$(info Uninstallation outside of chroot is not advised!!!)
 	$(info Please use chroot from a host to use the uninstall)

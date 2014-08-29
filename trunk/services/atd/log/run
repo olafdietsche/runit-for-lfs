@@ -2,4 +2,4 @@
 if [ ! -d /var/log/atd ] ; then
    mkdir /var/log/atd
 fi
-exec /usr/sbin/svlogd -tt /var/log/atd
+exec chpst -ulog svlogd -tt /var/log/atd

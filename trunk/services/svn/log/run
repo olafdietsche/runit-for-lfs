@@ -2,4 +2,4 @@
 if [ ! -d /var/log/svn ] ; then
   mkdir /var/log/svn
 fi
-exec /usr/sbin/svlogd -tt /var/log/svn
+exec chpst -ulog svlogd -tt /var/log/svn

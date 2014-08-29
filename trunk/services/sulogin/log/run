@@ -2,4 +2,4 @@
 if [ ! -d /var/log/su ] ; then
   mkdir /var/log/su
 fi
-exec /usr/sbin/svlogd -tt /var/log/su
+exec chpst -ulog svlogd -tt /var/log/su

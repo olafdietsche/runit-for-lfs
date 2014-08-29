@@ -9,3 +9,7 @@
 #     echo "Starting TiMidity++"
 #     /usr/bin/timidity -iAD -Os -B2,8
 # fi
+#
+# Please try to avoid scripts from BLFS that utilize init-function
+# from the /lib/lsb directory. File init-functions is not supported by
+# Runit-for-LFS.

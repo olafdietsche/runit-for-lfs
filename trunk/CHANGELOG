@@ -1,0 +1,14 @@
+20140829 - Initial release of Runit-for-LFS.
+
+- New consolidated and centralized init boot scripts.
+- Legacy support through rc.local for sysv scripts and non-Runit
+  covered BLFS services.
+- New runit.conf system configuration file. Replaces functionality of
+  rc.site, createfiles, udev_retry, and other files from LFS-Bootscripts.
+- New run scripts for many services.
+- Modified LSB service boot scripts for BLFS services.
+- Services requiring logs have log services included.
+- Simplified single and multi runlevels for basic usage.
+- Imported and modified shutdown script from VoidLinux.
+- Imported and modified halt binary from VoidLinux to mimic sysvinit.
+- Support for Runit 2.1.1 or later.

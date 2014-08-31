@@ -1,4 +1,4 @@
-[ ] - Log files for Runit should be ran using chpst with this syntax:
+[?] - Log files for Runit should be ran using chpst with this syntax:
 
       The main trigger in the primary service run file should be 
       
@@ -15,6 +15,9 @@
       exec chpst -ulog svlogd -tt </path/to/log/directory>
       
       We shouldn't have to directly call svlogd using chpst.
+      
+      However, the /path/to method is needed if group log and user log do
+      not exist.
 
 [ ] - Create/Import run service files for the following services:
           [x] - dovecot

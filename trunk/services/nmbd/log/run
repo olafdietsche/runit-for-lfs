@@ -2,4 +2,4 @@
 if [ ! -d /var/log/nmbd ] ; then
    mkdir /var/log/nmbd
 fi
-exec chpst -ulog svlogd -tt /var/log/nmbd
+exec /usr/bin/svlogd -tt /var/log/nmbd

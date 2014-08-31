@@ -2,4 +2,4 @@
 if [ -d /var/log/vsftpd ]; then
   mkdir -p /var/log/vsftpd
 fi
-exec chpst -ulog svlogd -tt /var/log/vsftpd
+exec /usr/bin/svlogd -tt /var/log/vsftpd

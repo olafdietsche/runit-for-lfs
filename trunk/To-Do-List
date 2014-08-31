@@ -55,7 +55,7 @@
 [x] - Remove sulogin service. This service is pointless for our implementation and only
       introduces a further headache on the system by forcing the user to login multiple times
       and it makes job control in the shell unusable.
-[ ] - Thoroughly check each service run file for errors. Currently on some systems used for
+[x] - Thoroughly check each service run file for errors. Currently on some systems used for
       testing and development, service sshd refuses to start properly, and stay in the "up"
       status.
       

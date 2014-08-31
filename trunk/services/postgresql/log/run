@@ -2,4 +2,4 @@
 if [ ! -d /var/log/postgresql ] ; then
    mkdir /var/log/postgresql
 fi
-exec chpst -ulog svlogd -tt /var/log/postgresql
+exec /usr/bin/svlogd -tt /var/log/postgresql

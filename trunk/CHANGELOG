@@ -1,3 +1,8 @@
+20140830 - Bug fix release.
+
+- Reverted log run files to /path/to method due to the fact group and
+  user "log" may not exist in the system.
+
 20140829 - Initial release of Runit-for-LFS.
 
 - New consolidated and centralized init boot scripts.

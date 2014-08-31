@@ -2,4 +2,4 @@
 if [ ! -d /var/log/kdm ] ; then
    mkdir /var/log/kdm
 fi
-exec chpst -ulog svlogd -tt /var/log/kdm
+exec /usr/bin/svlogd -tt /var/log/kdm

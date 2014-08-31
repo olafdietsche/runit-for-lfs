@@ -2,4 +2,4 @@
 if [ ! -d /var/log/acpid ] ; then
    mkdir /var/log/acpid
 fi
-exec chpst -ulog svlogd -tt /var/log/acpid
+exec /usr/bin/svlogd -tt /var/log/acpid

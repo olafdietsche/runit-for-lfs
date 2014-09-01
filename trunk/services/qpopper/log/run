@@ -2,4 +2,4 @@
 if [ -d /var/log/qpopper ]; then
   mkdir -p /var/log/qpopper
 fi
-exec /usr/bin/svlog -tt /var/log/qpopper/*/
+exec /usr/bin/svlogd -tt /var/log/qpopper/*/

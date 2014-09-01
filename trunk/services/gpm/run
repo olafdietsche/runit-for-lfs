@@ -1,19 +1,9 @@
 #!/bin/sh
-# Begin gpm service run file
-# concatenate stdout and stderr into one stream for logging.
 exec 2>&1
-# if the configuration file exists, source it.
-if [ -f /etc/sysconfig/mouse ]
-	  then
-	  . /etc/sysconfig/mouse
+[ -r /etc/sysconfig/mouse ] && . /etc/sysconfig/mouse
+if [ -z "$MDEVICE" ] || [ -z "$PROTOCOL" ]; then
+   echo "Please create an /etc/sysconfig/mouse file"
+   echo "containing MDEVICE and PROTOCOL values."
+   exit 1
 fi
-# and if it doesn't, or if it's wrong, shout and exit.
-if [ -z "$MDEVICE" ] || [ -z "$PROTOCOL" ]
-	  then
-	  echo "Please create an /etc/sysconfig/mouse file containing"
-	  echo "MDEVICE and PROTOCOL values"
-	  exit 1;
-fi
-# setup and run the service
 exec  gpm -D -m $MDEVICE -t $PROTOCOL &> /dev/null
-# End of gpm service run file

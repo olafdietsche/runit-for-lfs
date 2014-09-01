@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/sbin/ntpd  --nofork -g -u ntp:ntp
+exec ntpd --nofork -g -u ntp:ntp

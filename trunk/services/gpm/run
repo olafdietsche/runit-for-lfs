@@ -6,4 +6,4 @@ if [ -z "$MDEVICE" ] || [ -z "$PROTOCOL" ]; then
    echo "containing MDEVICE and PROTOCOL values."
    exit 1
 fi
-exec  gpm -D -m $MDEVICE -t $PROTOCOL &> /dev/null
+exec gpm -D -m $MDEVICE -t $PROTOCOL &> /dev/null

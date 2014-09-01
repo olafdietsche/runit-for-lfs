@@ -1,3 +1,2 @@
 #!/bin/sh
-/bin/killall -q /usr/bin/dbus-daemon
-rm -rf /run/dbus/system_bus_socket /run/dbus/pid
+rm -rf /run/dbus/system_bus_socket /run/dbus.pid

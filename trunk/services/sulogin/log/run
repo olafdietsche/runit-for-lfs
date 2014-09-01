@@ -1,5 +1,5 @@
 #!/bin/sh
 if [ ! -d /var/log/su ] ; then
-  mkdir /var/log/su
+   mkdir /var/log/su
 fi
 exec /usr/bin/svlogd -tt /var/log/su

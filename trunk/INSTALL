@@ -18,7 +18,7 @@ The SysVinit components that will be removed include init, halt, shutdown,
 runlevel, killall5, fstab-decode, bootlogd, poweroff, telinit, reboot, and man
 pages associated with those.
 
-The lfs-bootscript components that will be removed include the directories and
+The lfs-bootscripts components that will be removed include the directories and
 contents of /lib/services, /lib/lsb, /etc/rc.d, /etc/rc.d/init.d, and the
 executables ifup, ifdown, ipv4-static, ipv4-static-route, rc, and possibly
 others that may be present.
@@ -156,6 +156,10 @@ signal init to reboot or shutdown no longer exist. A simple script named
 "post_install_reboot" is included in the runit-for-lfs build directory to
 safely halt the system and perform a low-level reboot. To run this script, log
 out of X Windows to a tty console prompt, and as root...
+
+   NOTE: Skip this section if the installations were done in a chroot
+   environment. Instead, exit chroot, unmount the virtual kernel file
+   systems, and reboot the host system in its usual way.
 
 cd <path to runit-for-lfs>
 post_install_reboot

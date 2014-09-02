@@ -59,6 +59,7 @@ install:
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty5/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty6/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/sulogin/*
+	chmod +x ${DESTDIR}/${ETCDIR}/sv/sulogin/log/*
 
 clean:
 	-rm -vf halt pause suspend

@@ -31,7 +31,7 @@ will be installed by Runit and runit-for-lfs.
 It is possible to revert back to SysVinit after installing Runit and
 runit-for-lfs. But uninstalling Runit and runit-for-lfs only removes the
 installed components and does not restore what was present before. SysVinit and
-lfs-bootscript would have to be re-installed after uninstalling Runit and
+lfs-bootscripts would have to be re-installed after uninstalling Runit and
 runit-for-lfs. However, it is always a better idea to make a thorough and
 tested backup of the system and store it in a safe place before starting.
 
@@ -130,7 +130,7 @@ mkdir -pv /etc/runit/runsvdir/multi
 Install runit-for-lfs
 ---------------------
 1. Unpack the runit-for-lfs tarball in a suitable build directory such as
-/sources in a typical LFS system. The runit-lfs-tar tarball will unpack to a
+/sources in a typical LFS system. The runit-for-lfs tarball will unpack to a
 new directory named "runit-for-lfs"...
 
 tar xf runit-for-lfs-<version>.tar.bz2

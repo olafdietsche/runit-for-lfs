@@ -212,19 +212,6 @@ for file in /run/udev/tmp-rules--* ; do
     rm -f $file
 done
 
-# Re-trigger subsystems listed in /etc/sysconfig/udev_retry.
-msg "Processing /etc/sysconfig/udev_retry...\n"
-if [ -f /etc/sysconfig/udev_retry ]; then
-  touch /etc/sysconfig/udev_retry
-fi
-#sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
-while read line ; do
-   for subsystem in $line ; do
-      udevadm trigger --subsystem-match=$subsystem --action=add
-      udevadm settle     
-   done
-done
-
 # If we have CGroups, this will load them.
 mountpoint -q /sys/fs/cgroup || mount -t tmpfs cgroup /sys/fs/cgroup -o mode=0755
 awk '$4==1 { system("mountpoint -q /sys/fs/cgroup/" $1 " || mount -t cgroup -o " $1 ",x-mount.mkdir cgroup /sys/fs/cgroup/" $1) }' /proc/cgroups

@@ -41,15 +41,15 @@ A Word About Chroot
 As explained in the next section, our installation instructions first remove
 the existing SysVinit system. In spite of that, Runit and runit-for-lfs can be
 installed directly into a running system. A script is included to reboot the
-system safely after Runit and runit-for-lfs has been installed. Or if
-preferred, Runit and runit-for-lfs can be installed in a non-running system in
-a chroot environment of a separate host system. In that situation, when the
+system safely the first time after Runit and runit-for-lfs have been installed.
+Or if preferred, Runit and runit-for-lfs can be installed in a non-running system
+in a chroot environment of a separate host system. In that situation, when the
 installation steps are completed one only has to exit the chroot environment
 and reboot the host system.
 
 Installing Runit and runit-for-lfs in a chroot environment is the user's
 choice. Refer back to the LFS book's sections on mounting the virtual kernel
-filesystems and entering the chroot environment. Then proceed on with the next
+filesystems and entering the chroot environment. Then proceed with the next
 section on preliminary steps. At the end of the installation, omit the final
 step about rebooting. Instead, exit the chroot environment, unmount the virtual
 filesystems, and reboot out of the host system into the system with the new

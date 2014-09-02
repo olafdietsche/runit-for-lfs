@@ -214,7 +214,10 @@ done
 
 # Re-trigger subsystems listed in /etc/sysconfig/udev_retry.
 msg "Processing /etc/sysconfig/udev_retry...\n"
-sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
+if [ -f /etc/sysconfig/udev_retry ]; then
+  touch /etc/sysconfig/udev_retry
+fi
+#sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
 while read line ; do
    for subsystem in $line ; do
       udevadm trigger --subsystem-match=$subsystem --action=add

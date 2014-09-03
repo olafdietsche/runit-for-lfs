@@ -3,6 +3,7 @@ Pending -
 - Removed redundant udev_retry from Stage 1 script. Command was succeeded
   by the runit.conf MODULES section and is not required.
 - Added VirtualBox Service (VBoxService) run service file from VoidLinux.
+- Added Virtuoso Service run and log service files.
 
 20140830 - Bug fix release.
 

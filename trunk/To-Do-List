@@ -1,24 +1,3 @@
-[?] - Log files for Runit should be ran using chpst with this syntax:
-
-      The main trigger in the primary service run file should be 
-      
-      #!/bin/sh
-      exec 2>&1
-      exec <service> -<arguments>
-      
-      With the log run file as:
-
-      #!/bin/sh
-      if [ -d </path/to/log/directory> ]; then
-        mkdir -p </path/to/log/directory>
-      fi
-      exec chpst -ulog svlogd -tt </path/to/log/directory>
-      
-      We shouldn't have to directly call svlogd using chpst.
-      
-      However, the /path/to method is needed if group log and user log do
-      not exist.
-
 [ ] - Create/Import run service files for the following services:
           [x] - dovecot
           [x] - haveged
@@ -46,37 +25,13 @@
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS.
 [ ] - Fix Networking table up for error handling.
-[x] - Add CleanFS handler to stage-1.
-[x] - Add msg_fail and msg_ok triggers as needed.
-[x] - Add Stage 3 Network Shutdown section.
-[x] - Thoroughly test Makefile. Several "install" paths accidentally were not working.
-[x] - Remove all required instances of reference and usage of /lib/lsb/init-functions. This
-      was left over from sysvinit and isn't needed by Runit.
-[x] - Remove sulogin service. This service is pointless for our implementation and only
-      introduces a further headache on the system by forcing the user to login multiple times
-      and it makes job control in the shell unusable.
-[x] - Thoroughly check each service run file for errors. Currently on some systems used for
-      testing and development, service sshd refuses to start properly, and stay in the "up"
-      status.
+[ ] - Readd BLFS service install/uninstalltion back to the Makefile to create and remove
+      symlinks and execution permissions.
       
 Flagged for deletion:
 
-The following files are deprecated and do not need to be included and are going to be expunged
-during the next cycle I'm accessing the SVN directly.
-
-[x] modules - Was determined it was unnecessary.
-[x] init-functions - Was a hold over from sysvinit. No longer needed and scripts requiring
-    function calls to are are now removed and edited.
-[x] blfs-services/pppoe and pppoe lsb script - The BLFS project removed them a long time ago
-    and the maintainers have said they were up to be removed as well.
-[x] blfs-services ipx lsb script - BLFS project removed this as well. Considering how old
-    IPX is as a protocol, I'm not surprised as barely anything would even begin to use it
-    any longer.
+None.
     
 Other things to consider:
 
-[x] - Create Changelog for initial release.
-[x] - Imported rc.local script to handle custom services not covered by Runit yet in the system.
-      This is a temporary measure, but I plan to keep it. Many services such as the one's listed
-      above can be started using a trigger set in rc.local similar to how Slackware Linux
-      performs a scan for and load of service files if they are found in the system.
+None.

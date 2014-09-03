@@ -4,7 +4,7 @@
 # Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
 # Work derived from VoidLinux and ArchIgnite and adapted for LFS.
 
-PATH=/bin:/sbin:/usr/bin:/usr/sbin
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 # This will setup a sulogin shell just in case any part of the boot process suddenly stops
 # for whatever reason.

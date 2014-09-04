@@ -9,46 +9,14 @@ official release as of 8-29-2014.
 
 This implementation is comprised of:
 
-RTM Release - 20140829
+RTM Release - 20140904
 
-- Complete rewrite of the stage scripts using the method of Arch Ignite's
-  monolithic bootscript design. We originally used the bazaar style with
-  external scripts, but found a single script was easier to maintain and
-  debug in the end.
+- Fixed a flag in the Makefile which caused the services in /etc/sv to not
+  allow symlinks. Symlinking should now work as intended.
+- Removed redundant udev_retry from Stage 1 script. Command was succeeded
+  by the runit.conf MODULES section and is not required.
+- Added VirtualBox Service (VBoxService) run service file from VoidLinux.
+- Added Virtuoso Service run and log service files.
   
-- Our scripts have deprecated many of the init components from lfs-bootscripts 
-  and blfs-bootscripts. These include init-functions, createfiles, modules, 
-  clock, and a few others. In our Runit system, many of the functions of 
-  those files are done by runit.conf or by the stages. Other traditional 
-  init components still used by our Runit system have been modified not to 
-  rely on init-functions (e.g., ipv4-static, ipv4-static-route, ifup, ifdown).
-  And still others will be sourced for certain user-set parameters if they 
-  exist (e.g., rc.site), otherwise our built-in defaults will be used.
-
-- We also include a makeshift rc.local script to launch any legacy scripts
-  and services prior to the services loading within Stage 2. Because runit
-  is backwards compatible with System V scripting, we can effectively use
-  legacy scripts and handlers to launch services. Do keep in mind any
-  references to init-functions in Sysvinit scripts will have to be removed. 
-  It's best to just use the command path with an echo message to launch a 
-  service. As more runscripts become available, you may need this file less 
-  and less.
-  
-- The package is centered around the release of Runit 2.1.1 or later versions.
-
-- We also have reimplemented several utilities donated to various Runit-using
-  distributions to function as SysV-like clones of shutdown, halt, and suspend.
-  These files should assist greatly in compatibility with Desktop Environments
-  and Window Managers.
-  
-- By default our system comes with two runlevels Single (for admin purposes only),
-  and Multi (for general usage). You are free to add as many runlevels you like
-  to Runit. For more information on that, visit: http://smarden.org/runit/runlevels.html
-  and read Gerrit Pape's documentation.
-  
-- Our Stage 1 script supports far more than the typical LFS bootscript package
-  and includes support for BtrFS partitions, network file systems, CGroups, and
-  various other out-of-the-ordinary support vectors usually found on big name
-  distributions.
-  
-Thank you all for your support, and well wishes in our endeavor.
+If you still have the original service files from a previous version, run
+make uninstall-true in chroot to remove them.

@@ -241,6 +241,22 @@ if [ -n "$MODULES" ]; then
     modprobe -ab ${MODULES}
 fi
 
+# Re-trigger subsystems listed in /etc/sysconfig/udev_retry.
+# You should attempt to use runit.conf's module loader section
+# before using this method to ensure the modules are properly
+# loading first. You will need the udev_retry file from the
+# original LFS website to use this method of module loading.
+if [ -f /etc/sysconfig/udev_retry ]; then
+  msg "Processing /etc/sysconfig/udev_retry...\n"
+  sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
+    while read line ; do
+      for subsystem in $line ; do
+        udevadm trigger --subsystem-match=$subsystem --action=add
+        udevadm settle
+      done
+    done
+fi
+
 # Let's set the kernel runtime parameters if any exist.
 if [ -f "/etc/sysctl.conf" ]; then
     msg "Setting kernel runtime parameters...\n"

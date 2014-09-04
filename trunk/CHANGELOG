@@ -1,5 +1,7 @@
-Pending -
+20140904 - Bug fix release
 
+- Fixed a flag in the Makefile which caused the services in /etc/sv to not
+  allow symlinks. Symlinking should now work as intended.
 - Removed redundant udev_retry from Stage 1 script. Command was succeeded
   by the runit.conf MODULES section and is not required.
 - Added VirtualBox Service (VBoxService) run service file from VoidLinux.

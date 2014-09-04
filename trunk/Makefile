@@ -44,7 +44,7 @@ install:
 	install -v -m 0755 ${SCRIPTS} ${DESTDIR}/${ETCDIR}/runit
 	install -v -m 0644 runit.conf ${DESTDIR}/${ETCDIR}
 	install -v -m 0755 rc.local ${DESTDIR}/${ETCDIR}
-	cp -aPv services/* ${DESTDIR}/${ETCDIR}/sv/
+	cp -apv services/* ${DESTDIR}/${ETCDIR}/sv/
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty1 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty2 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty3 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi

@@ -1,3 +1,7 @@
+Pending - Next release cycle
+
+- Fixed ctrlaltdel handler for rebooting.
+
 20140904 - Bug fix release
 
 - Fixed a flag in the Makefile which caused the services in /etc/sv to not

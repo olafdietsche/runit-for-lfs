@@ -11,5 +11,7 @@ MSG="System is going down..."
 touch /etc/runit/reboot
 
 # Proceed with shutdown process
-touch /etc/runit/stopit
-chmod 100 /etc/runit/stopit && echo "$MSG" | wall
+#touch /etc/runit/stopit
+touch /etc/runit/reboot
+chmod 100 /etc/runit/reboot && echo "$MSG" | wall
+#chmod 100 /etc/runit/reboot && echo "$MSG" | wall

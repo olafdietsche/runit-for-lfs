@@ -1,3 +1,6 @@
+[ ] - Fix shutdown script to handle 'now' as 'timer = 0' when executing the timer flag
+      when halting the system.
+      
 [ ] - Create/Import run service files for the following services:
           [ ] - devmapper (LVM2)
           [x] - dovecot
@@ -6,15 +9,15 @@
           [x] - iptables-ipv4
           [ ] - iptables-ipv6
           [ ] - krb5
-          [ ] - netfs
-          [ ] - nfs-client
-          [ ] - nfs-server
+          [ ] - netfs (testing)
+          [ ] - nfs-client (testing)
+          [ ] - nfs-server (testing)
           [x] - qpopper & qpopper-ssl
-          [ ] - rsyncd
+          [ ] - rsyncd (testing)
           [ ] - saslauthd
           [ ] - sendmail
-          [ ] - slapd
-          [ ] - soprano
+          [ ] - slapd (testing)
+          [ ] - soprano (testing)
           [ ] - stunnel
           [x] - svn
           [ ] - swat
@@ -22,12 +25,12 @@
           [x] - virtuoso
           [x] - vsftpd
           [ ] - winbindd
-[ ] - Clean up pid files to move system services into dedicated pipes.
+          
 [ ] - Create/Import any service run files not in forementioned list that could be useful
-      by BLFS.
-[ ] - Fix Networking table up for error handling.
+      by BLFS. [low priority]
+      
 [ ] - Readd BLFS service install/uninstalltion back to the Makefile to create and remove
-      symlinks and execution permissions.
+      symlinks and execution permissions. (work in progress)
       
 Flagged for deletion:
 

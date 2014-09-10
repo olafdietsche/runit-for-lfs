@@ -1,5 +1,6 @@
 [ ] - Fix shutdown script to handle 'now' as 'timer = 0' when executing the timer flag
-      when halting the system.
+      when halting the system. This should execute as +0 rather than now, though a work
+      around may be needed to call for now.
 
 [!] - Shutdown should now work through multi-mode rather than single. This needs testing.
       If shutdown does work without single user mode enabled, sulogin service will be

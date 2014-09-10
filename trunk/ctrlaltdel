@@ -6,17 +6,9 @@
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 MSG="System is going down in 10 seconds..."
-
-# Uncomment to disable Ctrl+Alt+Del...
-#echo Ctrl+Alt+Del is disabled. ; exit 0
-
 touch /etc/runit/{reboot,stopit}
-
-# Uncomment for Ctrl+Alt+Del to reboot...
 chmod 100 /etc/runit/{reboot,stopit}
-
-# Uncomment for Ctrl+Alt_Del to poweroff...
-#chmod 100 /etc/runit/stopit && chmod 0 /etc/runit/reboot
-
 echo "$MSG" | wall
 /bin/sleep 10
+
+exit 0

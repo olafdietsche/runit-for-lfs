@@ -5,13 +5,18 @@
 # Work derived from VoidLinux and Ignite and adapted for LFS.
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
-MSG="System is going down..."
+MSG="System is going down in 10 seconds..."
 
-# We check for this file in stage3 to halt or reboot
-touch /etc/runit/reboot
+# Uncomment to disable Ctrl+Alt+Del...
+#echo Ctrl+Alt+Del is disabled. ; exit 0
 
-# Proceed with shutdown process
-#touch /etc/runit/stopit
-touch /etc/runit/reboot
-chmod 100 /etc/runit/reboot && echo "$MSG" | wall
-#chmod 100 /etc/runit/reboot && echo "$MSG" | wall
+touch /etc/runit/{reboot,stopit}
+
+# Uncomment for Ctrl+Alt+Del to reboot...
+chmod 100 /etc/runit/{reboot,stopit}
+
+# Uncomment for Ctrl+Alt_Del to poweroff...
+#chmod 100 /etc/runit/stopit && chmod 0 /etc/runit/reboot
+
+echo "$MSG" | wall
+/bin/sleep 10

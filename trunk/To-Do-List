@@ -14,17 +14,17 @@
           [ ] - iptables-ipv6
           [x] - krb5
           [x] - lxdm
-          [ ] - netfs (testing)
-          [ ] - nfs-client (testing)
-          [ ] - nfs-server (testing)
+          [x] - netfs
+          [x] - nfs-client
+          [x] - nfs-server
           [ ] - php-frm
           [x] - qpopper & qpopper-ssl
-          [ ] - rsyncd (testing)
+          [x] - rsyncd
           [ ] - saslauthd
           [ ] - sendmail
           [x] - slapd
           [x] - soprano
-          [ ] - stunnel
+          [x] - stunnel
           [x] - svn
           [ ] - swat
           [ ] - sysstat

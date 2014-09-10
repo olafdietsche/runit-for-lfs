@@ -5,9 +5,10 @@
 # Work derived from VoidLinux and Ignite and adapted for LFS.
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
-MSG="System is going down..."
+MSG="System is going down for reboot in 10 seconds..."
+touch /etc/runit/{reboot,stopit}
+chmod 100 /etc/runit/{reboot,stopit}
+echo "$MSG" | wall
+/bin/sleep 10
 
-# We check for this file in stage3 to halt or reboot
-# and roceed with shutdown process.
-touch /etc/runit/reboot
-chmod 100 /etc/runit/reboot && echo "$MSG" | wall
+exit 0

@@ -5,6 +5,10 @@
 #  runsvchdir single
 #}
 
+usage() {
+  echo "Usage: shutdown [-fF] [-kchPr] time [warning message]" >/dev/stderr; exit 1
+}
+
 #action=single
 
 while getopts akrhPHfFnct: opt; do
@@ -22,7 +26,7 @@ while getopts akrhPHfFnct: opt; do
 done
 shift $(expr $OPTIND - 1)
 
-time=$1; shift
+[ -n "$1" ] && time=$1 && shift
 message="${*:-system is going down}"
 
 

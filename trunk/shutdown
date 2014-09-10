@@ -1,11 +1,11 @@
 #!/bin/sh
 # shutdown - shutdown(8) lookalike for runit
 
-single() {
-  runsvchdir single
-}
+#single() {
+#  runsvchdir single
+#}
 
-action=single
+#action=single
 
 while getopts akrhPHfFnct: opt; do
   case "$opt" in

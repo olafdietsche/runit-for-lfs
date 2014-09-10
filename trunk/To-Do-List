@@ -1,5 +1,10 @@
 [ ] - Fix shutdown script to handle 'now' as 'timer = 0' when executing the timer flag
       when halting the system.
+
+[!] - Shutdown should now work through multi-mode rather than single. This needs testing.
+      If shutdown does work without single user mode enabled, sulogin service will be
+      removed from the project along with ttyS0 as it serves no purpose. These were
+      leftovers from VoidLinux, and shouldn't even be needed.
       
 [ ] - Create/Import run service files for the following services:
           [ ] - devmapper (LVM2)

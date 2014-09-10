@@ -24,6 +24,7 @@ install:
 	install -v -m 0755 shutdown ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifup ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifdown ${DESTDIR}/${SBINDIR}
+  install -v -m 0755 runlevel ${DESTDIR}/${SBINDIR}
 	ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
 	ln -svf halt ${DESTDIR}/${SBINDIR}/reboot
 	install -dv ${DESTDIR}/${PREFIX}/share/man/man1
@@ -45,21 +46,19 @@ install:
 	install -v -m 0644 runit.conf ${DESTDIR}/${ETCDIR}
 	install -v -m 0755 rc.local ${DESTDIR}/${ETCDIR}
 	cp -apv services/* ${DESTDIR}/${ETCDIR}/sv/
+  ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty1 ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty1 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty2 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty3 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty4 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty5 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty6 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
-	ln -sfv ${DESTDIR}/${ETCDIR}/sv/sulogin ${DESTDIR}/${ETCDIR}/runit/runsvdir/single
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty1/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty2/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty3/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty4/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty5/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty6/*
-	chmod +x ${DESTDIR}/${ETCDIR}/sv/sulogin/*
-	chmod +x ${DESTDIR}/${ETCDIR}/sv/sulogin/log/*
 
 clean:
 	-rm -vf halt pause suspend
@@ -85,6 +84,7 @@ uninstall-true:
 	-rm -rvf ${DESTDIR}/${SBINDIR}/halt
 	-rm -rvf ${DESTDIR}/${SBINDIR}/ifup
 	-rm -rvf ${DESTDIR}/${SBINDIR}/ifdown
+  -rm -rvf ${DESTDIR}/${SBINDIR}/runlevel
 	-rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static-route
 	-rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static
 	-rm -rvf ${DESTDIR}/${PREFIX}/${BINDIR}/pause

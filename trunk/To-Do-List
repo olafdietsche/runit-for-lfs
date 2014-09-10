@@ -8,13 +8,12 @@
       leftovers from VoidLinux, and shouldn't even be needed.
       
 [ ] - Create/Import run service files for the following services:
-          [ ] - devmapper (LVM2)
           [x] - dovecot
           [x] - haveged
           [ ] - heimdal
           [x] - iptables-ipv4
           [ ] - iptables-ipv6
-          [ ] - krb5
+          [x] - krb5
           [ ] - netfs (testing)
           [ ] - nfs-client (testing)
           [ ] - nfs-server (testing)

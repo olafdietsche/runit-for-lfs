@@ -18,6 +18,7 @@
           [ ] - netfs (testing)
           [ ] - nfs-client (testing)
           [ ] - nfs-server (testing)
+          [ ] - php-frm
           [x] - qpopper & qpopper-ssl
           [ ] - rsyncd (testing)
           [ ] - saslauthd

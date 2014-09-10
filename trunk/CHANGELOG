@@ -1,5 +1,9 @@
 Pending - Next release cycle
 
+- Temporary fix for shutdown. Not sure why sulogin is misbehaving but it is.
+  The new fix should work without it, and call the halt without using single
+  user mode.
+- Uploaded several new services.
 - Fixed ctrlaltdel handler for rebooting.
 
 20140904 - Bug fix release

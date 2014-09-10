@@ -24,7 +24,7 @@ install:
 	install -v -m 0755 shutdown ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifup ${DESTDIR}/${SBINDIR}
 	install -v -m 0755 ifdown ${DESTDIR}/${SBINDIR}
-  install -v -m 0755 runlevel ${DESTDIR}/${SBINDIR}
+	install -v -m 0755 runlevel ${DESTDIR}/${SBINDIR}
 	ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
 	ln -svf halt ${DESTDIR}/${SBINDIR}/reboot
 	install -dv ${DESTDIR}/${PREFIX}/share/man/man1
@@ -84,7 +84,7 @@ uninstall-true:
 	-rm -rvf ${DESTDIR}/${SBINDIR}/halt
 	-rm -rvf ${DESTDIR}/${SBINDIR}/ifup
 	-rm -rvf ${DESTDIR}/${SBINDIR}/ifdown
-  -rm -rvf ${DESTDIR}/${SBINDIR}/runlevel
+	-rm -rvf ${DESTDIR}/${SBINDIR}/runlevel
 	-rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static-route
 	-rm -rvf ${DESTDIR}/${LIBDIR}/services/ipv4-static
 	-rm -rvf ${DESTDIR}/${PREFIX}/${BINDIR}/pause

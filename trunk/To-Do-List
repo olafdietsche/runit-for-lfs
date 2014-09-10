@@ -23,7 +23,7 @@
           [ ] - saslauthd
           [ ] - sendmail
           [ ] - slapd (testing)
-          [ ] - soprano (testing)
+          [x] - soprano
           [ ] - stunnel
           [x] - svn
           [ ] - swat

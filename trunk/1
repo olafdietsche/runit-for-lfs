@@ -64,7 +64,7 @@ mountpoint -q /dev/pts || mount /dev/pts
 
 # Set the console log verbosity level using LOGLEVEL in /etc/runit.conf.
 msg "Setting console log level...\n"
-dmesg -n "${LOGLEVEL:-'-4'}"
+dmesg -n "${LOGLEVEL:-4}"
 
 # Let's get root mounted at least in read-only for now.
 msg "Remounting rootfs read-only...\n"

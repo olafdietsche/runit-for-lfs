@@ -41,10 +41,6 @@ msg "Welcome to Linux From Scratch! \n"
 # to load optional system preferences.
 . /etc/runit.conf
 
-# The LFS rc.site file contains parameters and system variables that can customize various
-# aspects of the boot process. Source it now if it exists. Otherwise, defaults will be used.
-[ -r /etc/sysconfig/rc.site ] && . /etc/sysconfig/rc.site
-
 # A function from init-functions.
 is_true()
 {
@@ -66,10 +62,9 @@ ln -sfn /run/shm /dev/shm
 mkdir -p -m0755 /dev/pts
 mountpoint -q /dev/pts || mount /dev/pts
 
-# Set the console log verbosity level using LOGLEVEL in /etc/sysconfig/rc.site. If LOGLEVEL
-# is null or unset use the default of 4.
+# Set the console log verbosity level using LOGLEVEL in /etc/runit.conf.
 msg "Setting console log level...\n"
-dmesg -n "${LOGLEVEL:-4}"
+dmesg -n "${LOGLEVEL:-'-4'}"
 
 # Let's get root mounted at least in read-only for now.
 msg "Remounting rootfs read-only...\n"
@@ -107,7 +102,7 @@ fi
 # Let's get udev started. This is the first pass for udev, so it should trigger any and all
 # devices during this stage, if it doesn't the second pass will pick up anything else not
 # properly loaded.
-if [ -x udevd ]; then
+if [ -x /sbin/udevd ]; then
     _udevd=udevd
 else
     msg_warn "cannot find udevd!\n"
@@ -137,7 +132,7 @@ hostname ${HOSTNAME}
 # If we have any RAID devices, we'll now load them.
 if [ -x /usr/sbin/dmraid ]; then
     msg "Activating dmraid devices...\n"
-    /usr/sbin/dmraid -i -ay
+    dmraid -i -ay
 fi
 
 # If we have any BtrFS partitions, we'll load them here. By default BtrFS is not utilized by
@@ -179,20 +174,19 @@ fi
 msg "Mounting rootfs read-write...\n"
 mount -o remount,rw /
 
-# Start the system and kernel log daemons using SYSKLOGD_PARMS in /etc/sysconfig/rc.site. If
+# Start the system and kernel log daemons using SYSKLOGD_PARMS in /etc/runit.conf. If
 # SYSKLOGD_PARMS is null or unset use a default.
-parms=${SYSKLOGD_PARMS-'-m 0'}
 msg "Starting system and kernel log daemons...\n"
-syslogd $parms
-klogd
+syslogd ${SYSLOGD_PARMS:-'-m 0'}
+klogd ${KLOGD_PARMS:-'-c 0'}
 
 # Any non-networked file systems will now be mounted.
 msg "Mounting all non-network filesystems...\n"
 mount -a -t "nosysfs,nonfs,nonfs4,nosmbfs,nocifs" -O no_netdev
 
-# Clean /tmp. Skip this if SKIPTMPCLEAN in /etc/sysconfig/rc.site is true.
+# Clean /tmp. Skip this if SKIPTMPCLEAN in /etc/runit.conf is true.
 msg "Cleaning up /tmp...\n"
-if ! is_true "$SKIPTMPCLEAN" ; then
+if ! is_true "${SKIPTMPCLEAN}" ; then
     cd /tmp
     find . -xdev -mindepth 1 ! -name lost+found -delete
 fi
@@ -241,20 +235,13 @@ if [ -n "$MODULES" ]; then
     modprobe -ab ${MODULES}
 fi
 
-# Re-trigger subsystems listed in /etc/sysconfig/udev_retry.
-# You should attempt to use runit.conf's module loader section
-# before using this method to ensure the modules are properly
-# loading first. You will need the udev_retry file from the
-# original LFS website to use this method of module loading.
-if [ -f /etc/sysconfig/udev_retry ]; then
-  msg "Processing /etc/sysconfig/udev_retry...\n"
-  sed -e 's/#.*$//' /etc/sysconfig/udev_retry | grep -v '^$' | \
-    while read line ; do
-      for subsystem in $line ; do
-        udevadm trigger --subsystem-match=$subsystem --action=add
-        udevadm settle
-      done
-    done
+# Re-trigger subsystems listed in /etc/runit.conf
+msg "Processing udev for any remaining subsystems...\n"
+if [ -n "${SUBSYSTEM}" ]; then
+   for i in ${SUBSYSTEM} ; do
+      udevadm trigger --subsystem-match=${i} --action=add
+      udevadm settle
+   done
 fi
 
 # Let's set the kernel runtime parameters if any exist.

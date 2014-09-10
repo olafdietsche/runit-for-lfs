@@ -22,7 +22,7 @@
           [ ] - rsyncd (testing)
           [ ] - saslauthd
           [ ] - sendmail
-          [ ] - slapd (testing)
+          [x] - slapd
           [x] - soprano
           [ ] - stunnel
           [x] - svn

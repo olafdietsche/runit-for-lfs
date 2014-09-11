@@ -28,11 +28,13 @@ install:
 	ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
 	ln -svf halt ${DESTDIR}/${SBINDIR}/reboot
 	install -dv ${DESTDIR}/${PREFIX}/share/man/man1
-	install -v -m 0644 pause.1 ${DESTDIR}/${PREFIX}/share/man/man1
+	install -v -m 0644 pause.8 ${DESTDIR}/${PREFIX}/share/man/man8
 	install -v -m 0664 runit.conf.5 ${DESTDIR}/${PREFIX}/share/man/man5
 	install -v -m 0644 shutdown.8 ${DESTDIR}/${PREFIX}/share/man/man8
 	install -v -m 0644 halt.8 ${DESTDIR}/${PREFIX}/share/man/man8
 	install -v -m 0644 ifup.8 ${DESTDIR}/${PREFIX}/share/man/man8
+	install -v -m 0664 rc.local.5 ${DESTDIR}/${PREFIX}/share/man/man5
+	install -v -m 0644 runlevel.8 ${DESTDIR}/${PREFIX}/share/man/man8
 	ln -sfv ifup.8 ${DESTDIR}/${PREFIX}/share/man/man8/ifdown.8
 	ln -sfv halt.8 ${DESTDIR}/${PREFIX}/share/man/man8/poweroff.8
 	ln -sfv halt.8 ${DESTDIR}/${PREFIX}/share/man/man8/reboot.8
@@ -95,6 +97,8 @@ uninstall-true:
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/reboot.8
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/shutdown.8
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man5/runit.conf.5
-	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man1/pause.1
+	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/pause.8
+	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man5/rc.local.5
+	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/runlevel.8
 
 .PHONY : all install clean uninstall uninstall-true

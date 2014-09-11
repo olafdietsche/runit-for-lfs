@@ -34,6 +34,8 @@ When writing complex script commands in
 .B rc.local,
 remember that some traditional environment variables and configuration files used by LFS are ignored by the runit-for-lfs project, or may be defined in different locations, or may even have been removed. For example, the init-functions script of LFS is removed when runit-for-lfs is installed, so don't attempt to call functions in that file. See the runit-for-lfs README file for more information about things that runit-for-lfs does differently than traditional LFS.
 .PP
+The directory /etc/runit/rc.d is provided by runit-for-lfs as a place to put custom scripts, executables, or legacy SysVinit initscripts that may be desired or required but not provided by runit-for-lfs. Those can then be executed by commands in /etc/rc.local.
+.PP
 .SH AUTHOR
 Arthur Radley
 .br

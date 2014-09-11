@@ -174,11 +174,12 @@ fi
 msg "Mounting rootfs read-write...\n"
 mount -o remount,rw /
 
-# Start the system and kernel log daemons using SYSKLOGD_PARMS in /etc/runit.conf. If
-# SYSKLOGD_PARMS is null or unset use a default.
+# Start the system and kernel log daemons using command arguments provided by
+# /etc/runit.conf. Otherwise use no command arguments or our default if one 
+# is provided.
 msg "Starting system and kernel log daemons...\n"
 syslogd ${SYSLOGD_PARMS:-'-m 0'}
-klogd ${KLOGD_PARMS:-'-c 0'}
+klogd ${KLOGD_PARMS}
 
 # Any non-networked file systems will now be mounted.
 msg "Mounting all non-network filesystems...\n"

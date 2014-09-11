@@ -27,7 +27,8 @@ install:
 	install -v -m 0755 runlevel ${DESTDIR}/${SBINDIR}
 	ln -svf halt ${DESTDIR}/${SBINDIR}/poweroff
 	ln -svf halt ${DESTDIR}/${SBINDIR}/reboot
-	install -dv ${DESTDIR}/${PREFIX}/share/man/man1
+	install -dv ${DESTDIR}/${PREFIX}/share/man/man5
+	install -dv ${DESTDIR}/${PREFIX}/share/man/man8
 	install -v -m 0644 pause.8 ${DESTDIR}/${PREFIX}/share/man/man8
 	install -v -m 0664 runit.conf.5 ${DESTDIR}/${PREFIX}/share/man/man5
 	install -v -m 0644 shutdown.8 ${DESTDIR}/${PREFIX}/share/man/man8
@@ -61,6 +62,12 @@ install:
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty4/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty5/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty6/*
+	install -dv ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
+	install -v -m 0644 CHANGELOG ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
+	install -v -m 0644 INSTALL ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
+	install -v -m 0644 LICENSE-MIT ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
+	install -v -m 0644 README ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
+	install -v -m 0644 Release_Notes ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
 
 clean:
 	-rm -vf halt pause suspend
@@ -100,5 +107,6 @@ uninstall-true:
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/pause.8
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man5/rc.local.5
 	-rm -rvf ${DESTDIR}/${PREFIX}/share/man/man8/runlevel.8
+	-rm -rvf ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
 
 .PHONY : all install clean uninstall uninstall-true

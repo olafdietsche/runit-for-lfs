@@ -99,25 +99,12 @@ else
     echo "Using 'localtime' for the hardware clock..."
 fi
 
-# Let's get udev started. This is the first pass for udev, so it should trigger any and all
-# devices during this stage, if it doesn't the second pass will pick up anything else not
-# properly loaded.
-if [ -x /sbin/udevd ]; then
-    _udevd=udevd
-else
-    msg_warn "cannot find udevd!\n"
-fi
-
-# Anything not loaded by udev during the first pass, will now get loaded. This is helpful if
-# kernel modules have dependencies that require a loading prior to them, or just oddball
-# hardware that fails to load properly.
-if [ -n "${_udevd}" ]; then
-    msg "Starting udev and waiting for devices to settle...\n"
-    { ${_udevd} --daemon;
-        udevadm trigger --action=add --type=subsystems;
-        udevadm trigger --action=add --type=devices;
-        udevadm settle; } || emergency_shell
-fi
+# Let's get udev started. 
+msg "Starting udev and waiting for devices to settle...\n"
+{ /sbin/udevd --daemon;
+    /sbin/udevadm trigger --action=add --type=subsystems;
+    /sbin/udevadm trigger --action=add --type=devices;
+    /sbin/udevadm settle; } || emergency_shell
 
 # Now we'll get the loopback device started.
 msg "Setting up loopback interface...\n"

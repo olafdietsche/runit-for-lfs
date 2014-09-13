@@ -1,90 +1,78 @@
-.Dd July 29, 2014
-.Dt SHUTDOWN 8
-.Os Linux
-.Sh NAME
-.Nm shutdown
-.Nd bring down the system
-.Sh SYNOPSIS
-.Nm shutdown
-.Op Fl rhP
-.Op Fl fF
-.Op Cm now | Cm + Ns Ar mins
-.Op Ar message...
-.Sh DESCRIPTION
-.Nm
-brings the system down in a secure way.
-All logged-in users
-are notified that the system is going down, and
-.Xr login 1
-is blocked.
-.Pp
+.TH SHUTDOWN 8 "12 September 2014" "Runit for LFS"
+.SH NAME
+.B shutdown
+- bring down the system
+.SH SYNOPSIS
+.B shutdown [-rhP] [-fF] [-ck] [ now | +<mins> ] [ <message...> ]
+.SH DESCRIPTION
+.B shutdown
+brings the system down in a secure way. All logged-in users are notified that the system is going down, and login(1) is blocked.
+.PP
 By default,
-.Nm
-puts the system into single user mode. Rebooting and halting the
-system can be done using the following options:
-.Bl -tag -width indent
-.It Fl c
+.B shutdown
+puts the system into single user mode. Rebooting and halting the system can be done using the following options:
+.TP
+.B -c
 Cancel an ongoing shutdown.
-.It Fl f
-Enable fast booting; skip
-.Xr fsck 8
-on next boot.
-.It Fl F
-Force run of
-.Xr fsck 8
-on next boot.
-.It Fl h
+.TP
+.B -f
+Enable fast booting; skip fsck(8) on next boot.
+.TP
+.B -F
+Force run of fsck(8) on next boot.
+.TP
+.B -h
 Halt the system.
-.It Fl k
+.TP
+.B -k
 Don't really shutdown; only send the warning messages to everybody.
-.It Fl P
+.TP
+.B -P
 Poweroff the system.
-.It Fl r
+.TP
+.B -r
 Reboot the system.
-.It Cm now
+.TP
+.B now
 Shutdown without further waiting.
-.It Cm + Ns Ar mins
+.TP
+.B +<mins>
 Wait
-.Ar mins
+.B <mins>
 minutes before shutting down.
-.It Ar message
+.TP
+.B <message>
 Message displayed to all users, defaults to "system is going down".
-.El
-.Sh UNSUPPORTED OPTIONS
+.SH UNSUPPORTED OPTIONS
+.PP
 This version of
-.Nm
-is based on
-.Xr runit 8 ,
-the following features are
-.Sy not
-supported:
-.Bl -tag -width indent
-.It Fl t Ar secs
-to wait
-.Ar secs
+.B shutdown
+is based on runit(8) and the following features are not supported:
+.TP
+.B -t <secs>
+wait
+.B <secs>
 seconds between SIGKILL and SIGTERM on shutdown is silently ignored.
-.It Fl a
-Use
-.Pa /etc/shutdown.allow .
-.It Fl H
+.TP
+.B -a
+Use /etc/shutdown.allow.
+.TP
+.B -H
 Drop into boot monitor.
-.It Fl n
-Don't call
-.Xr init 8 .
-.It Ar hh Ns : Ns Ar mm
+.TP
+.B -n
+Don't call init(8).
+.TP
+hh:mm
 Absolute time specification is not implemented.
-.El
-.Sh EXAMPLES
+.SH EXAMPLES
+.TP
 Turn off the system:
-.Dl # shutdown -h now
-.Sh SEE ALSO
-.Xr fsck 8 ,
-.Xr init 8 ,
-.Xr runit 8 ,
-.Xr runsvchdir 8 ,
-.Xr halt 8 ,
-.Xr poweroff 8 ,
-.Xr reboot 8
-.Sh AUTHOR
-.An Christian Neukirchen ,
-.Mt chneukirchen@gmail.com .
+# shutdown -h now
+.SH SEE ALSO
+fsck(8), init(8), runit(8), runsvchdir(8), halt(8), poweroff(8), reboot(8)
+.SH AUTHOR
+Christian Neukirchen,
+chneukirchen@gmail.com
+.br
+This man page was edited and reformatted for runit-for-lfs.

@@ -6,8 +6,7 @@
 .B runit.conf
 is a configuration file used to set parameters and variables for various scripts that Runit uses when starting or stopping the system.
 .SH OPTIONS
-.B HARDWARECLOCK
-= [UTC|localtime]
+.B HARDWARECLOCK\fP=[\fBUTC\fP|\fBlocaltime\fP]
 .PP
 Runit will use this variable to tell the hwclock program whether the hardware clock is set to Coordinated Universal Time (UTC) or local time. No other method exists for programs to determine what time system the hardware clock is using. So this variable must be set appropriately for the hardware and system clocks to be set to the correct time during booting and shutting down.
 .PP

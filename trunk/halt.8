@@ -3,14 +3,16 @@
 .B halt, reboot, poweroff
 - stop the system
 .SH SYNOPSIS
-.B halt [-n][-f]
+.B halt \fR[\fB-n\fR][\fB-f\fR]
 .br
-.B reboot [-n][-f]
+.B reboot \fR[\fB-n\fR][\fB-f\fR]
 .br
-.B poweroff[-n][-f]
+.B poweroff \fR[\fB-n\fR][\fB-f\fR]
 .PP
 .SH DESCRIPTION
-.B halt, reboot, and poweroff
+.B halt, reboot,
+and
+.B poweroff
 tell init to bring down, reboot, or power off the system. Without
 .B -f,
 they are shortcuts for

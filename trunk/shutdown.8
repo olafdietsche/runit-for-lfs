@@ -3,7 +3,8 @@
 .B shutdown
 - bring down the system
 .SH SYNOPSIS
-.B shutdown [-rhP] [-fF] [-ck] [ now | +<mins> ] [ <message...> ]
+.B shutdown
+\fR[\fB-rhP\fR] [\fB-fF\fR] [\fB-ck\fR] [\fBnow\fR | \fB+\fImins\fR] [\fImessage\fR]
 .SH DESCRIPTION
 .B shutdown
 brings the system down in a secure way. All logged-in users are notified that the system is going down, and login(1) is blocked.
@@ -36,12 +37,10 @@ Reboot the system.
 .B now
 Shutdown without further waiting.
 .TP
-.B +<mins>
-Wait
-.B <mins>
-minutes before shutting down.
+\fR\fB+\fImins\fR
+Wait \fImins\fR minutes before shutting down.
 .TP
-.B <message>
+\fImessage\fR
 Message displayed to all users, defaults to "system is going down".
 .SH UNSUPPORTED OPTIONS
 .PP
@@ -49,10 +48,8 @@ This version of
 .B shutdown
 is based on runit(8) and the following features are not supported:
 .TP
-.B -t <secs>
-wait
-.B <secs>
-seconds between SIGKILL and SIGTERM on shutdown is silently ignored.
+.B -t \fR\fIsecs\fR
+wait \fR\fIsecs\fR seconds between SIGKILL and SIGTERM on shutdown is silently ignored.
 .TP
 .B -a
 Use /etc/shutdown.allow.
@@ -63,12 +60,16 @@ Drop into boot monitor.
 .B -n
 Don't call init(8).
 .TP
-hh:mm
+\fR\fIhh:mm\fR
 Absolute time specification is not implemented.
 .SH EXAMPLES
 .TP
-Turn off the system:
+Halt and poweroff without delay...
 # shutdown -h now
+.TP
+Reboot in five minutes...
+# shutdown -r +5
+.PP
 .SH SEE ALSO
 fsck(8), init(8), runit(8), runsvchdir(8), halt(8), poweroff(8), reboot(8)
 .SH AUTHOR

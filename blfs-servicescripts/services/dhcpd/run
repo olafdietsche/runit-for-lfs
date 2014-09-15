@@ -1,0 +1,4 @@
+#!/bin/sh
+sv check eth0 >/dev/null || exit 1
+exec 2>&1
+exec dhcpd -f -d -cf ./config eth0

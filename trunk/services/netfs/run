@@ -1,3 +1,0 @@
-#!/bin/sh
-exec /bin/mount -a -O _netdev
-exec /usr/bin/pause

@@ -1,3 +1,0 @@
-#!/bin/sh
-sv check rpcbind >/dev/null || exit 1
-exec /usr/sbin/rpc.statd

@@ -1,2 +1,0 @@
-#!/bin/sh
-exec setsid sulogin -p </dev/tty1 >/dev/tty1 2>&1

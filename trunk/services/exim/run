@@ -1,3 +1,0 @@
-#!/bin/sh
-sv check eth0 >/dev/null || exit 1
-exec /usr/sbin/exim -bdf -q30m

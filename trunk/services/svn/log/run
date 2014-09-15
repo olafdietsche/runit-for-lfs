@@ -1,5 +1,0 @@
-#!/bin/sh
-if [ ! -d /var/log/svn ] ; then
-   mkdir /var/log/svn
-fi
-exec /usr/bin/svlogd -tt /var/log/svn

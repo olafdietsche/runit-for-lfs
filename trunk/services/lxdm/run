@@ -1,3 +1,0 @@
-#!/bin/sh
-sv start /etc/runit/runsvdir/multi/agetty-tty* || exit 1
-exec /usr/sbin/lxdm -d

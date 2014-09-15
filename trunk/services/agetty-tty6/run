@@ -1,2 +1,0 @@
-#!/bin/sh
-exec chpst -P /sbin/agetty tty6 linux

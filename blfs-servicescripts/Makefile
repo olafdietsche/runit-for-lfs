@@ -14,9 +14,6 @@ all:
 create-dirs:
 	install -d -m ${DIRMODE} ${EXTDIR}/sysconfig
 
-create-svdir:
-	install -d -m ${DIRMODE} ${EXTDIR}/sv
-
 create-service-dir:
 	install -d -m ${DIRMODE} ${LIBDIR}
 
@@ -32,22 +29,32 @@ install-service-bridge: create-service-dir
 install-service-wpa: create-service-dir
 	install -m ${MODE} lsb/wpa ${LIBDIR}
 
-install-acpid: create-svdir
-	install -d -m ${DIRMODE} services/acpid ${EXTDIR}/sv
+install-acpid:
+	mkdir -pv ${ETCDIR}/sv/acpid
+	cp -apv services/acpid/* ${EXTDIR}/sv/acpid
 	ln -sfv ${EXTDIR}/sv/acpid ${EXTDIR}/runit/runsvdir/multi
+	chmod +x ${ETCDIR}/sv/acpid/*
+	chmod +x ${ETCDIR}/sv/acpid/log/*
 
-install-alsa: create-svdir
-	install -d -m ${DIRMODE} services/audio ${EXTDIR}/sv
+install-alsa:
+	mkdir -pv ${ETCDIR}/sv/audio
+	cp -apv services/audio/* ${ETCDIR}/sv/audio
 	ln -sfv ${EXTDIR}/sv/audio ${EXTDIR}/runit/runsvdir/multi
+	chmod +x ${ETCDIR}/sv/audio/*
 
-install-autofs: create-dirs create-svdir
-	install -m $(CONFMODE) sysconfig/autofs.conf $(EXTDIR)/sysconfig/
-	install -d -m ${DIRMODE}/sv/autofs ${EXTDIR}/runit/runsvdir/multi
+install-autofs:
+	install -m ${CONFMODE} sysconfig/autofs.conf ${EXTDIR}/sysconfig/
+	mkdir -pv ${ETCDIR}/sv/autofs
+	cp -apv services/autofs/* ${ETCDIR}/sv/autofs
 	ln -sfv ${EXTDIR}/sv/autofs ${EXTDIR}/runit/runsvdir/multi
+	chmod +x ${ETCDIR}/sv/autofs/*
 
-install-atd: create-svdir
-	install -d -m ${DIRMODE}/atd ${EXTDIR}/runit/runsvdir/multi
+install-atd:
+	mkdir -pv ${ETCDIR}/sv/atd
+	cp -apv services/atd/* ${ETCDIR}/sv/atd
 	ln -sfv ${EXTDIR}/sv/atd ${EXTDIR}/runit/runsvdir/multi
+	chmod +x ${ETCDIR}/sv/atd/*
+	chmod +x ${ETCDIR}/sv/atd/log/*
 
 install-avahi:
 

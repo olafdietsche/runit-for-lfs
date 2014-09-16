@@ -161,47 +161,57 @@ out of X Windows to a tty console prompt, and as root...
    environment. Instead, exit chroot, unmount the virtual kernel file
    systems, and reboot the host system in its usual way.
 
-cd <path to runit-for-lfs>
+cd <path/to/runit-for-lfs/lfs-servicescripts>
 post_install_reboot
 
-
-Regarding BLFS
---------------
-
-At this point runit-for-lfs has only installed the bare minimum of services that
-are required to make the system bootable and usable for growing the system with
-packages. This package also contains the blfs-servicescripts package in it's own
-directory that will handle installing services for components from the BLFS book.
-
-The BLFS book traditionally uses blfs-bootscripts as it's directory somewhere in
-the system such as the /sources  directory. You then typically run the command:
-
-make install-<service_name>
-
-to install the sysvinit bootscript or lsb system service script depending on the
-package from the book.
-
-To make transition easier, these same principles will apply but instead of using
-the Makefile to install sysvinit bootscripts and lsb system service scripts, we
-use them to install the lsb system service scripts and the Runit service execution
-scripts using the same format of installation, create symlinks, and set permissions
-for execution. This means that if you install D-Bus sysvinit scripts with:
-
-make install-dbus
-
-the same command will equally install the Runit service execution scripts from the
-blfs-servicescripts directory as well as the lsb system service scripts.
-
-This avoids breaking the book notes so that anyone following the traditional LFS
-and BLFS books can use either sysvinit or Runit with the same commands to build,
-install, and setup the system with few if any deviations from the book.
 
 What Now?
 ---------
 Hopefully your system successfully reboots like it did before. Console
 messaging content and appearance will be different, but it should boot to a
-normal console login prompt. Login and enable all services and daemons that are
-installed in the LFS system. Within seconds of being enabled, services will be
-running. See the README file included with runit-for-lfs for more information
-about enabling, disabling, and checking the status of daemons.
+normal console login prompt. At this point runit-for-lfs has installed only the
+bare minimum of services that are required to make the system bootable and
+usable. What you do now depends on whether your system is a minimal base LFS
+system or was already a full-fledged working BLFS system with services and
+daemons installed.
+
+After installing runit-for-lfs in a new or base LFS system, nothing else needs
+to be done until or unless you go on to build a BLFS system that includes
+services and daemons. The BLFS book traditionally uses the blfs-bootscripts
+package for installing SysV initscripts for all of the services and daemons
+covered in the BLFS book. Typically, when the BLFS book installs a service
+initscript, you are instructed to untar the blfs-bootscript tarball, change
+directories to the untarred directory, and run a command in this format...
+
+make install-<service_name>
+
+The runit-for-lfs package follows the same command syntax to install the
+runit-for-lfs service and daemon run scripts. The only difference is that the
+runit-for-lfs package contains the service and daemon run scripts in its own
+source tree. So to when you install a BLFS package where the BLFS book tells
+you to install a SysV initscript, the command will be the same as it is in the
+book. But you will untar your runit-for-lfs tarball, change the terminal
+directory to the blfs-servicescript directory in the source tree, and run the
+command there.
+
+After installing runit-for-lfs in a system that was already a working BLFS
+system with services and daemons, you will login and begin installing the
+runit-for-lfs run scripts for all of your installed services and daemons as
+described above. Install a runit-for-lfs run script for each service or daemon
+for which you originally installed a SysV initscript from the blfs-bootscript
+package. This is an easy task that will take only a few minutes to do. For
+example, if you originally installed the D-Bus SysV initscript like this...
+
+make install-dbus
+
+...then the same command will install the runit-for-lfs run scripts for D-Bus
+from the blfs-servicescripts directory of the runit-for-lfs source tree. That
+command will install the service script, create the necessary symlinks, and set
+the required permissions for the service to start and be supervised.
+
+Within seconds of being installed and enabled, your services will be running
+and supervised. See the README file included with runit-for-lfs for more
+information about enabling, disabling, and checking the status of daemons. 
+All that's left to do now is enjoy running and supervising your services and
+daemons with Runit.
 

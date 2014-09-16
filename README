@@ -131,7 +131,7 @@ to all of the services that need to be running during normal use of the system.
 At installation time, the single and multi runlevel directories will
 contain symlinks only to basic agetty services for tty consoles. To enable
 an additional service that has been installed in the system (e.g., sshd, dbus,
-cupsd, etc.), change the terminal directory to the blfs-servicescript directory
+cups, etc.), change the terminal directory to the blfs-servicescript directory
 in the runit-for-lfs package source tree and run the command as it is in the
 BLFS book for installing the corresponding SysV initscript. For example, to
 enable the fcron daemon after the fcron package has been installed...
@@ -153,12 +153,14 @@ the services in /etc/sv that should run in that new runlevel. For example,
 
 In that example, a new runlevel named "desktop" was created and a symlink to
 /etc/sv/dbus was created in it which will result in the dbus daemon being
-started and supervised any time the desktop runlevel is the current runlevel. Continue creating symlinks in the new runlevel directory as needed.
+started and supervised any time the desktop runlevel is the current runlevel.
+Continue creating symlinks in the new runlevel directory as needed.
 
 So how does a runlevel such as single or multi become the current runlevel? A
 symlink named /etc/runit/runsvdir/current is automatcially created pointing to
 the current runlevel directory. It is this /etc/runit/runsvdir/current symlink
-that is actually used by stage 2 to start services. So if /etc/runit/runsvdir/current is a symlink to multi, then all the services in the
+that is actually used by stage 2 to start services. So if
+/etc/runit/runsvdir/current is a symlink to multi, then all the services in the
 multi runlevel will be started and supervised. To change runlevels, use the
 runsvchdir command which changes the symlink /etc/runit/runsvdir/current to
 target the new runlevel specified in the runsvchdir command.
@@ -201,7 +203,8 @@ Re-enable a service that had been disabled...
 Enabling Service Daemons
 ------------------------
 The runit-for-lfs project includes a prepared and growing list of scripts to
-start up many common services installed in typical LFS systems. They can be found in the blfs-servicescript directory of the runit-for-lfs package source
+start up many common services installed in typical LFS systems. They can be
+found in the blfs-servicescript directory of the runit-for-lfs package source
 tree. To enable a service that was already installed in the system when the
 runit-for-lfs system was installed, merely untar the runit-for-lfs tarball,
 change directories to the blfs-servicescript directory, and run the
@@ -215,9 +218,12 @@ install-<service>' command as already described above.
 
 Our goal is to provide run scripts for all services included in the BLFS book.
 However when a package that includes a service daemon is installed and no run
-script directory exists for it in /etc/sv, then it is usually a simple matter
-to create a run script for it following some of the existing run scripts as
-examples. Often a single command to start the daemon is all that is needed.
+script directory exists for it in the runit-for-lfs source tree, then it is
+usually a simple matter to create a run script for it in /etc/sv following some
+of the existing run scripts as examples. Often a single command to start the
+daemon is all that is needed. There also is an rc.local script provided by
+runit-for-lfs for running commands at boot time. See the installed rc.local man
+page for important details about using that.
 
 
 Shutting Down and Rebooting

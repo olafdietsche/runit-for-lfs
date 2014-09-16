@@ -1,5 +1,7 @@
 Pending - Next release cycle
 
+- Added new simplified installation format for blfs-servicescripts for
+  Makefile. Commands are more simplified but should work without a problem.
 - Segregated lfs and blfs service files. Redrafted Makefile for the
   blfs-servicescripts to mimic functions of blfs-bootscripts for system v.
 - Cache Update service. This service is a multi-use service that can be run

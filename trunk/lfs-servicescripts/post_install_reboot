@@ -39,7 +39,7 @@ echo "De-activate swap partitions"
 swapoff -a
 
 echo "Bring down loopback interface"
-ip link set lo down &>/dev/null
+ip link set lo down
 
 echo "Flush filesystem buffers"
 echo s > /proc/sysrq-trigger

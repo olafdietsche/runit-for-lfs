@@ -1,0 +1,7 @@
+#!/bin/sh
+
+PIDFILE=/var/run/winbindd.pid
+
+pgrep -u root winbindd
+
+rm -rf ${PIDFILE}

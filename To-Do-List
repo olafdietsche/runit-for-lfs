@@ -1,48 +1,20 @@
-[ ] - Fix shutdown script to handle 'now' as 'timer = 0' when executing the timer flag
-      when halting the system. This should execute as +0 rather than now, though a work
-      around may be needed to call for now.
-
-[!] - Shutdown should now work through multi-mode rather than single. This needs testing.
-      If shutdown does work without single user mode enabled, sulogin service will be
-      removed from the project along with ttyS0 as it serves no purpose. These were
-      leftovers from VoidLinux, and shouldn't even be needed.
-      
 [ ] - Create/Import run service files for the following services:
-          [x] - dovecot
-          [x] - haveged
-          [x] - iptables-ipv4
           [ ] - iptables-ipv6
-          [x] - krb5
-          [x] - lxdm
-          [x] - netfs
-          [x] - nfs-client
-          [x] - nfs-server
-          [x] - php-frm
-          [x] - qpopper & qpopper-ssl
-          [x] - rsyncd
-          [x] - saslauthd
-          [x] - sendmail
-          [x] - slapd
-          [x] - soprano
-          [x] - stunnel
-          [x] - svn
-          [x] - swat
-          [x] - sysstat
-          [x] - virtuoso
-          [x] - vsftpd
-          [x] - winbindd
-          
+
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS. [low priority]
-      
+
 [ ] - Readd BLFS service install/uninstalltion back to the Makefile to create and remove
       symlinks and execution permissions. (work in progress)
-      
+
 Flagged for deletion:
 
 None.
-    
+
 Other things to consider:
+
+[ ] - Migrate update-cache to lfs-servicescripts and add commands for "if" to check for
+      executables in the system.
 
 Creating run service files for Community Driven Beyond Linux From Scratch (CBLFS) for
 the following services:

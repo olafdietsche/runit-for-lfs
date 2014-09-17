@@ -23,8 +23,8 @@ if [ -x /usr/bin/pango-querymodules ]; then
   exec pango-querymodules --update-cache
 fi
 
-if
-exec gtk-query-immodules-3.0 --update-cache
+if [ -x /usr/bin/gtk-query-immodules-3.0 ]; then
+  exec gtk-query-immodules-3.0 --update-cache
 fi
 
 # If you would like to run the daemon continually comment out the pause applet

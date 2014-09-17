@@ -17,7 +17,7 @@
           [x] - netfs
           [x] - nfs-client
           [x] - nfs-server
-          [ ] - php-frm
+          [x] - php-frm
           [x] - qpopper & qpopper-ssl
           [x] - rsyncd
           [ ] - saslauthd

@@ -3,13 +3,29 @@
 # This service will update the cache of the machine in one of two ways, either
 # continuously, or upon startup of the daemon. It is recommended that you use
 # the default setup to run this daemon.
+if [ -x /sbin/ldconfig ]; then
+  exec /sbin/ldconfig
+fi
 
-exec ldconfig
-exec update-desktop-database /usr/share/applications
-exec gdk-pixbuf-query-loaders --update-cache
-exec glib-compile-schemas /usr/share/glib-2.0/schemas
-exec pango-querymodules --update-cache
+if [ -x /usr/bin/update-desktop-database ]; then
+  exec update-desktop-database /usr/share/applications
+fi
+
+if [ -x /usr/bin/gdk-pixbuf-query-loaders ]; then
+  exec gdk-pixbuf-query-loaders --update-cache
+fi
+
+if [ -x /usr/bin/glib-compile-schemas ]; then
+  exec glib-compile-schemas /usr/share/glib-2.0/schemas
+fi
+
+if [ -x /usr/bin/pango-querymodules ]; then
+  exec pango-querymodules --update-cache
+fi
+
+if
 exec gtk-query-immodules-3.0 --update-cache
+fi
 
 # If you would like to run the daemon continually comment out the pause applet
 # execution. By default pause is enabled.

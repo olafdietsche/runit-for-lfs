@@ -20,7 +20,7 @@
           [x] - php-frm
           [x] - qpopper & qpopper-ssl
           [x] - rsyncd
-          [ ] - saslauthd
+          [x] - saslauthd
           [ ] - sendmail
           [x] - slapd
           [x] - soprano

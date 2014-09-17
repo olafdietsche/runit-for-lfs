@@ -56,12 +56,14 @@ install:
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty4 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty5 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	ln -sfv ${DESTDIR}/${ETCDIR}/sv/agetty-tty6 ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
+	ln -sfv ${DESTDIR}/${ETCDIR}/sv/update-cache ${DESTDIR}/${ETCDIR}/runit/runsvdir/multi
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty1/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty2/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty3/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty4/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty5/*
 	chmod +x ${DESTDIR}/${ETCDIR}/sv/agetty-tty6/*
+	chmod +x ${DESTDIR}/${ETCDIR}/sv/update-cache/*
 	install -dv ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
 	install -v -m 0644 ../CHANGELOG ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs
 	install -v -m 0644 ../INSTALL ${DESTDIR}/${PREFIX}/share/doc/runit-for-lfs

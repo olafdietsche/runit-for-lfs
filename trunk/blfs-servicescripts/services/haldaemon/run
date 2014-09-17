@@ -8,8 +8,8 @@
 # build than the traditional build supported by BLFS as detailed here:
 # http://archive.linuxfromscratch.org/blfs-museum/6.2.0/BLFS-6.2.0/general/hal.html
 #
-# As well as the special source and patch tarball package provided
-# in this directory.
+# as well as the special source and patch tarball packages provided
+# in this directory for haldaemon and hal-info.
 
 sv check dbus >/dev/null || exit 0
 

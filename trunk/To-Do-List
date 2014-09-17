@@ -27,10 +27,10 @@
           [x] - stunnel
           [x] - svn
           [x] - swat
-          [ ] - sysstat
+          [x] - sysstat
           [x] - virtuoso
           [x] - vsftpd
-          [ ] - winbindd
+          [x] - winbindd
           
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS. [low priority]

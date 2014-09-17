@@ -23,6 +23,10 @@ if [ -x /usr/bin/pango-querymodules ]; then
   exec pango-querymodules --update-cache
 fi
 
+if [ -x /usr/bin/gtk-query-immodules-2.0 ]; then
+  exec gtk-query-immodules-2.0 --update-cache
+fi
+
 if [ -x /usr/bin/gtk-query-immodules-3.0 ]; then
   exec gtk-query-immodules-3.0 --update-cache
 fi

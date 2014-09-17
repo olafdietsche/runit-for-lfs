@@ -21,12 +21,12 @@
           [x] - qpopper & qpopper-ssl
           [x] - rsyncd
           [x] - saslauthd
-          [ ] - sendmail
+          [x] - sendmail
           [x] - slapd
           [x] - soprano
           [x] - stunnel
           [x] - svn
-          [ ] - swat
+          [x] - swat
           [ ] - sysstat
           [x] - virtuoso
           [x] - vsftpd

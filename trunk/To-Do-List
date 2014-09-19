@@ -4,11 +4,11 @@
 [ ] - Create/Import run service files for the following services:
           [ ] - iptables-ipv6
 
-[ ] - The following services need logging services attached:
+[x] - The following services need logging services attached:
           [x] - dhcpd
           [x] - fcron
-          [ ] - ntpd
-          [ ] - rsyncd
+          [x] - ntpd
+          [x] - rsyncd
 
 [ ] - Create/Import any service run files not in forementioned list that could be useful
       by BLFS. [low priority]

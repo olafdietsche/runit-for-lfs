@@ -1,3 +1,6 @@
+[ ] - Insert comment and license headers into all scripts and files. [HIGH PRIORITY]
+      This is needed prior to finalizations and the next release cycle.
+
 [ ] - Create/Import run service files for the following services:
           [ ] - iptables-ipv6
 

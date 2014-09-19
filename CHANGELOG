@@ -1,4 +1,6 @@
 Pending - Next release cycle
+
+- Completed migration of services to Runit.
 - Added legacy support for haldaemon. The haldaemon run script comes with a
   special preloaded source tarball specifically for BLFS systems, but does
   require a special rebuild of D-Bus to support this feature. Instructions

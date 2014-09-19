@@ -5,8 +5,8 @@
           [ ] - iptables-ipv6
 
 [ ] - The following services need logging services attached:
-          [ ] - dhcpd
-          [ ] - fcron
+          [x] - dhcpd
+          [x] - fcron
           [ ] - ntpd
           [ ] - rsyncd
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ ! -d /var/log/dbus ] ; then
-   mkdir /var/log/dbus
+if [ ! -d /var/log/ntpd ] ; then
+   mkdir -p /var/log/ntpd
 fi
-exec /usr/bin/svlogd -tt /var/log/dbus
+exec /usr/bin/svlogd -tt /var/log/ntpd

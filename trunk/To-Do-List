@@ -1,26 +1,13 @@
 [ ] - Create/Import run service files for the following services:
           [ ] - iptables-ipv6
 
-[x] - The following services need logging services attached:
-          [x] - dhcpd
-          [x] - fcron
-          [x] - ntpd
-          [x] - rsyncd
-
-[ ] - Create/Import any service run files not in forementioned list that could be useful
-      by BLFS. [low priority]
-
-[ ] - Readd BLFS service install/uninstalltion back to the Makefile to create and remove
-      symlinks and execution permissions. (work in progress)
-
 Flagged for deletion:
 
 None.
 
 Other things to consider:
 
-[x] - Migrate update-cache to lfs-servicescripts and add commands for "if" to check for
-      executables in the system.
+None
 
 Creating run service files for Community Driven Beyond Linux From Scratch (CBLFS) for
 the following services:

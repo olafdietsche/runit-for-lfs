@@ -1,7 +1,0 @@
-#!/bin/sh
-
-pidfile=/run/stunnel-swat.pid
-
-pgrep -u root stunnel
-
-rm -rf $pidfile

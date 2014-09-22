@@ -1,5 +1,11 @@
-Pending - Next release cycle
+Pending - 1.0rc1
 
+- Changed out the update-cache pause command for a timed rerun command using
+  sleep instead. The cache will update every hour upon boot, and can be tuned
+  by the admin for longer wait times if necessary.
+- Fixed several daemons path and flags for execution states. This should allow
+  some of the daemons not running properly to execute as intended, and stay in
+  the "up" status rather than down.
 - Completed migration of services to Runit.
 - Added legacy support for haldaemon. The haldaemon run script comes with a
   special preloaded source tarball specifically for BLFS systems, but does

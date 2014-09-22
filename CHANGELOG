@@ -1,5 +1,7 @@
-Pending - 1.0rc1
+Release 1.0rc1 - 20140922 - Release Candidate 1
 
+- Removed several unneeded finish scripts as they only removed PID files in
+  the /run directory which is cleaned on shutdown of the system anyways.
 - Changed out the update-cache pause command for a timed rerun command using
   sleep instead. The cache will update every hour upon boot, and can be tuned
   by the admin for longer wait times if necessary.

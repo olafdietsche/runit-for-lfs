@@ -7,7 +7,7 @@ None.
 
 Other things to consider:
 
-None
+[ ] - Import "btrfs scan device --all-devices" into stage 1 for btrfs volumes.
 
 Creating run service files for Community Driven Beyond Linux From Scratch (CBLFS) for
 the following services:

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec unbound -d
+exec /usr/bin/unbound -d

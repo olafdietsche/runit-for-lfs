@@ -1,3 +1,18 @@
+Release 1.0rc2 - 20141109 - Release Candidate 2
+
+- Reworked several scripts in BLFS section to use correct paths and invoked
+  the chpst utility from Runit as needed for effective permission and execution
+  handling for services and utilities.
+  
+- Indentified several scripts as non-fucntional or limited function:
+
+    kdm 	- works but does not allow logins.
+    saslauthd	- inoperable at current time.
+    stunnel	- inoperable at current time.
+    sshd	- service displays as working, but says service is down and wants up.
+
+- Updated LFS service update-cache to run correct path triggers.
+
 Release 1.0rc1 - 20140922 - Release Candidate 1
 
 - Removed several unneeded finish scripts as they only removed PID files in

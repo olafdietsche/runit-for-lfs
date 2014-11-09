@@ -1,5 +1,5 @@
 #!/bin/sh
-sv check dbus >/dev/null || exit 1
+sv check /etc/runit/runsvdir/multi/dbus >/dev/null || exit 1
 # Create required dirs
 [ ! -d /etc/NetworkManager/dispatcher.d ] && mkdir -m0755 -p /etc/NetworkManager/dispatcher.d
 [ ! -d /etc/NetworkManager/system-connections ] && mkdir -m0755 -p /etc/NetworkManager/system-connections

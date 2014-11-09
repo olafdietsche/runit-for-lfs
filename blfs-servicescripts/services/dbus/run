@@ -6,4 +6,4 @@ if [ ! -d /var/run/dbus ]; then
   chgrp messagebus /var/run/dbus
 fi
 /usr/bin/dbus-uuidgen --ensure
-exec dbus-daemon --nofork --nopidfile --config-file=/etc/dbus-1/system.conf
+exec /usr/bin/dbus-daemon --nofork --nopidfile --config-file=/etc/dbus-1/system.conf

@@ -62,14 +62,17 @@ echo "Sending KILL signal to processes..."
 pkill --inverse -s0,1 -KILL
 
 # Unmount the local file systems.
-echo "Unmounting filesystems, disabling swap..."
+echo "Unmounting filesystems..."
 umount /tmp
-swapoff -a
 umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
 
 # Remount the root file system in read-only.
 echo "Remounting rootfs read-only..."
 mount -o remount,ro /
+
+# Turn off swap
+echo "Disabling swap..."
+swapoff -a
 
 # Turn off the local loopback
 ip link set lo down

@@ -1,0 +1,5 @@
+[ ] - Port Slackware /etc/rc.d/rc.S into Stage 1.
+[ ] - Port Slackware /etc/rc.d/rc.M into Stage 2.
+[ ] - Port Slackware /etc/rc.d/rc.6 into Stage 3.
+[ ] - Port Slackware /etc/rc.d/rc.sysvinit into a useable format for usage with Runit.
+[ ] - Port Runit-for-LFS base services into Slackware.

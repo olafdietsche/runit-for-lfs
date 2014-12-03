@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# Slackware Runit Stage 2 Bootscript.
+# Copyright 2014 James Powell.
+# Work derived from Runit-for-LFS and adapted for Slackware.
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+# Setup first tty as unicode again, stage1 does not work correctly for tty1.
+unicode_start
+
+# Try and detect if the current runlevel directory has been created yet. It
+# should exist as a symlink to the current selected runlevel via runsvchdir.
+# If the symlinked service directories are not found, they will be created.
+if [ ! -d /etc/runit/runsvdir/current ]; then
+   pushd /etc/runit/runsvdir
+   ln -s multi current
+   popd
+fi
+
+# Let runsvchdir select the default runlevel
+runsvchdir multi >/dev/null
+
+# rc.M is used to load all services in Slackware traditionally. This will
+# comprise the remainder of Stage 2.
+[ -x /etc/runit/rc.d/rc.M ] && /etc/runit/rc.d/rc.M
+
+# If you wish to use the graphical login display manager, uncomment this line below.
+# This line duplicates the functionality of switching the system to runlevel 4 in
+# inittab.
+#[ -x /etc/runit/rc.d/rc.X ] && /etc/runit/rc.d/rc.X
+
+# Start all services detected in the current runlevel directory.
+#
+# On Slackware normally this will not be called except to launch getties and
+# other core services launched previously by sysvinit and /etc/inittab only.
+exec env - PATH=$PATH \
+runsvdir /etc/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'
+

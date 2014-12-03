@@ -1,0 +1,9 @@
+Release 0.0.1
+
+- Initial release of the Runit-for-Slackware project a subsidy of Runit-for-LFS.
+- Migrated rc.M with minor updates and edits into Runit for Stage 2 execution and
+  launching of daemons in the classic Slackware startup sequence.
+- Migrated rc.4 into rc.X to serve as the graphical startup ran post-rc.M. This service
+  may be enabled or disabled in /etc/runit/2 with a simple comment.
+- Migrated Runit-for-LFS system utilities into Slackware to replace sysvinit utilities
+  and duplicate functionality.

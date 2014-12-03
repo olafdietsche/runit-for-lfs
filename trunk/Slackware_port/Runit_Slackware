@@ -1,0 +1,4 @@
+Due to a lingering bug in sysvinit, this project aims to minimally introduce Runit into Slackware
+Linux without replacing the majority of the system fundamentals and bootscripts and reuse, as much
+as possible, the original Slackware service and bootscripts, while replacing the sysvinit package
+solely with the aspect of toolkits, udev service control, and various other minor scriptworks.

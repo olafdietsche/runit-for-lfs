@@ -1,4 +1,0 @@
-Version - 0.0.1
-
-* Initial start of Runit port for Slackware using traditional Slackware-based
-  BSD-init startup with minimal usage of standard Runit service run files.

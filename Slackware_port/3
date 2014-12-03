@@ -1,0 +1,234 @@
+#!/bin/sh
+
+# Linux From Scratch Runit Stage 3 Bootscript.
+# Copyright 2014 James Powell, Keith Hedger, and Stoat of LinuxQuestions.
+# Work derived from VoidLinux and Ignite and adapted for LFS.
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+# First re-read the configuration to see if any special parameters are needed.
+. /etc/runit.conf
+
+# This stops the services, and brings down all the services in 15 seconds. Normally
+# Runit uses a few minutes to bring down services, but unless totally necessary, the
+# system can be brought down very quickly in under 15 seconds. We'll use 10 as default.
+echo "Waiting for services to stop..."
+sv -w10 force-stop /etc/runit/runsvdir/current/*
+sv exit /etc/runit/runsvdir/current/*
+
+# This saves the entropy file.
+echo "Saving random seed..."
+dd if=/dev/urandom of=/var/lib/random-seed count=1 bs=512 >/dev/null 2>&1
+
+# Set the hardware clock.
+echo "Setting the hardware clock..."
+if [[ ${HARDWARECLOCK} = UTC || ${HARDWARECLOCK} = utc ]] ; then
+    HWC=$(echo $HARDWARECLOCK | tr A-Z a-z)
+    hwclock  --systohc --$HWC
+else
+    # If HARDWARECLOCK is anything else, commented, or null, then use 'localtime' as the default...
+    HWC=localtime
+    hwclock --systohc --$HWC
+fi
+
+# Send the halt signal.
+halt -w # for utmp
+
+# Run any local shutdown scripts:
+if [ -x /etc/rc.d/rc.local_shutdown ]; then
+  /etc/rc.d/rc.local_shutdown stop
+fi
+
+# Stop the Apache web server:
+if [ -x /etc/rc.d/rc.httpd ]; then
+  /etc/rc.d/rc.httpd stop
+fi
+
+# Stop the MySQL database:
+if [ -r /var/run/mysql/mysql.pid ]; then
+  . /etc/rc.d/rc.mysqld stop
+fi
+
+# Stop the Samba server:
+if [ -x /etc/rc.d/rc.samba ]; then
+  . /etc/rc.d/rc.samba stop
+fi
+
+# Shut down the NFS server:
+if [ -x /etc/rc.d/rc.nfsd ]; then
+  /etc/rc.d/rc.nfsd stop
+fi
+
+# Shut down the SSH server:
+if [ -x /etc/rc.d/rc.sshd ]; then
+  /etc/rc.d/rc.sshd stop
+fi
+
+# Shut down the SASL authentication daemon:
+if [ -x /etc/rc.d/rc.saslauthd ]; then
+  /etc/rc.d/rc.saslauthd stop
+fi
+
+# Shut down OpenLDAP:
+if [ -x /etc/rc.d/rc.openldap ]; then
+  /etc/rc.d/rc.openldap stop
+fi
+
+# Stop D-Bus:
+if [ -x /etc/rc.d/rc.messagebus ]; then
+  sh /etc/rc.d/rc.messagebus stop
+fi
+
+# Kill any processes (typically gam) that would otherwise prevent
+# unmounting NFS volumes:
+unset FUSER_DELAY
+for dir in $(/bin/mount | grep 'type nfs' | cut -d ' ' -f 3 ) ; do
+  echo "Killing processes holding NFS mount $dir open..."
+  # Background this to prevent fuser from also blocking shutdown:
+  /usr/bin/fuser -k -m $dir &
+  FUSER_DELAY=5
+done
+# If fuser was run, let it have some delay:
+if [ ! -z "$FUSER_DELAY" ]; then
+  sleep $FUSER_DELAY
+fi
+
+# Unmount any NFS, SMB, or CIFS filesystems:
+echo "Unmounting remote filesystems."
+/bin/umount -v -a -l -f -r -t nfs,smbfs,cifs
+
+# Try to shut down pppd:
+PS="$(ps ax)"
+if echo "$PS" | /bin/grep -q -w pppd ; then
+  if [ -x /usr/sbin/ppp-off ]; then
+    /usr/sbin/ppp-off
+  fi
+fi
+
+# Shut down YP services:
+if [ -x /etc/rc.d/rc.yp ]; then
+  if grep -wq stop /etc/rc.d/rc.yp ; then
+    /etc/rc.d/rc.yp stop
+  fi
+fi
+
+# Bring down the networking system, but first make sure that this
+# isn't a diskless client with the / partition mounted via NFS:
+if ! /bin/mount | /bin/grep -q 'on / type nfs' ; then
+  if [ -x /etc/rc.d/rc.inet1 ]; then
+    . /etc/rc.d/rc.inet1 stop
+  fi
+fi
+
+# In case dhcpcd might have been manually started on the command line,
+# look for the .pid file, and shut dhcpcd down if it's found:
+if /bin/ls /etc/dhcpc/*.pid 1> /dev/null 2> /dev/null ; then
+  /sbin/dhcpcd -k 1> /dev/null 2> /dev/null
+  # A little time for /etc/resolv.conf and/or other files to
+  # restore themselves.
+  sleep 2
+fi
+
+# Shut down PCMCIA devices:
+if [ -x /etc/rc.d/rc.pcmcia ]; then
+  . /etc/rc.d/rc.pcmcia stop
+  # The cards might need a little extra time here to deactivate:
+  /bin/sleep 5
+fi
+
+# Turn off process accounting:
+if [ -x /sbin/accton -a -r /var/log/pacct ]; then
+  /sbin/accton off
+fi
+
+# Terminate acpid before syslog:
+if [ -x /etc/rc.d/rc.acpid -a -r /var/run/acpid.pid ]; then # quit
+  . /etc/rc.d/rc.acpid stop
+fi
+
+# Dismount the fuse file system
+echo "Unloading FUSE..."
+umount /sys/fs/fuse/connections
+
+# Stop udev and bring down all devices.
+echo "Stopping udev..."
+udevadm control --exit
+
+# Stop any remaining processes and core services.
+echo "Sending TERM signal to processes..."
+pkill --inverse -s0,1 -TERM
+sleep 5
+echo "Sending KILL signal to processes..."
+pkill --inverse -s0,1 -KILL
+
+# Try to turn off quota.
+if /bin/grep -q quota /etc/fstab ; then
+  if [ -x /sbin/quotaoff ]; then
+    echo "Turning off filesystem quotas."
+    /sbin/quotaoff -a
+  fi
+fi
+
+# Clear /var/lock/subsys.
+if [ -d /var/lock/subsys ]; then
+  rm -f /var/lock/subsys/*
+fi
+
+# Unmount the local file systems.
+echo "Unmounting filesystems, disabling swap..."
+swapoff -a
+umount -r -a -t nosysfs,noproc,nodevtmpfs,notmpfs
+
+# Remount the root file system in read-only.
+echo "Remounting rootfs read-only..."
+mount -v -o -n remount,ro /
+
+# Close any volumes opened by cryptsetup:
+if [ -f /etc/crypttab -a -x /sbin/cryptsetup ]; then
+  cat /etc/crypttab | grep -v "^#" | grep -v "^$" | while read line; do
+    # NOTE: we only support LUKS formatted volumes (except for swap)!
+    LUKS=$(echo $line | tr '\t' ' ' | tr -s ' ' | cut -f1 -d' ')
+    DEV=$(echo $line | tr '\t' ' ' | tr -s ' ' | cut -f2 -d' ')
+    OPTS=$(echo $line | tr '\t' ' ' | tr -s ' ' | cut -f4 -d' ')
+    if /sbin/cryptsetup isLuks $DEV 2>/dev/null ; then
+      echo "Locking LUKS crypt volume '${LUKS}':"
+      /sbin/cryptsetup luksClose ${LUKS}
+    elif echo $OPTS | grep -wq swap ; then
+      # If any of the volumes was used as encrypted swap,
+      # then run mkswap on the underlying device -
+      # in case other Linux installations on this computer should use it:
+      echo "Erasing encrypted swap '${LUKS}' and restoring normal swap on ${DEV}:"
+      /sbin/cryptsetup remove ${LUKS}
+      mkswap $DEV
+    fi
+  done
+fi
+
+# Deactivate LVM volume groups:
+if [ -r /etc/lvmtab -o -d /etc/lvm/backup ]; then
+  echo "Deactivating LVM volume groups:"
+  /sbin/vgchange -an --ignorelockingfailure
+fi
+
+if [ -x /sbin/genpowerd ]; then
+  # See if this is a powerfail situation:
+  if /bin/egrep -q "FAIL|SCRAM" /etc/upsstatus 2> /dev/null ; then
+    # Signal UPS to shut off the inverter:
+    /sbin/genpowerd -k
+    if [ ! $? = 0 ]; then
+      echo
+      echo "There was an error signaling the UPS."
+      echo "Perhaps you need to edit /etc/genpowerd.conf to configure"
+      echo "the serial line and UPS type."
+      # Wasting 15 seconds of precious power:
+      /bin/sleep 15
+    fi
+  fi
+fi
+
+# Turn off the local loopback
+ip link set lo down
+
+# Shutdown the system.
+sleep 1
+sync

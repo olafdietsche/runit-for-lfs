@@ -1,0 +1,97 @@
+runit-for-slackware        Installation Notes               December 2, 2014
+============================================================================
+
+Runit-for-Slackware is a custom project designed to effectively replacing the
+aged sysvinit package without destroying heavy levels of compatibility with
+the existing Slackware init system service scripts. Although services may be
+migrated into Runit service run files, this option is left entirely to the
+system administrator.
+
+Changes Made By Installing runit-for-slackware
+----------------------------------------------
+Installing Runit and runit-for-slackware into a Slackware system will make
+some small changes to the system. The components of SysVinit will be removed.
+
+The SysVinit components that will be removed include init, halt, shutdown,
+runlevel, killall5, fstab-decode, bootlogd, poweroff, telinit, reboot, and man
+pages associated with those.
+
+The existing Slackware service scripts will be reused until further notice. This
+project aims to keep traditional init scripts viable until enough can be done to
+complete a transition if ever desired.
+
+Where needed by Runit, custom replacements for many of these removed components
+will be installed by Runit and runit-for-slackware.
+
+It is possible to revert back to SysVinit after installing Runit and
+runit-for-slackware by removing the runit-for-slackware package through pkgtools
+and reinstalling the sysvinit packages.
+
+Install Runit
+-------------
+1. Download a copy of Runit from the Runit homepage...
+
+  http://smarden.org/runit/runit-2.1.2.tar.gz
+
+  Or use git to checkout a copy...
+
+  git clone http://smarden.org/git/runit.git
+
+2. Unpack the Runit tarball in a suitable build directory such as /sources in a
+typical LFS system. The Runit tarball will unpack to a new subdirectory named
+"admin"...
+
+tar xf runit-2.1.2.tar.gz
+cd admin/runit-2.1.2
+
+3. Now build the package...
+
+package/compile
+  
+4. As root, install the software...
+
+cd command
+install -v runit runit-init /sbin
+install -v runsvdir runsv chpst svlogd sv /usr/bin
+install -v runsvchdir utmpset /usr/sbin
+cp -v ../man/* /usr/share/man/man8
+ln -svf /sbin/runit-init /sbin/init
+mkdir -pv /etc/sv
+mkdir -pv /etc/runit/runsvdir/single
+mkdir -pv /etc/runit/runsvdir/multi
+  
+
+Install runit-for-lfs
+---------------------
+1. Unpack the runit-for-lfs tarball in a suitable build directory such as
+/sources in a typical LFS system. The runit-for-lfs tarball will unpack to a
+new directory named "runit-for-lfs"...
+
+tar xf runit-for-slackware-<version>.tar.bz2
+cd runit-for-slackware
+
+2. Build and install the software. As root...
+
+make && make install
+
+Reboot
+------
+At this point, the SysVinit software have been removed, and Runit has been
+installed and configured to be the new init system. However, the original init
+program is still running, but the executables to signal init to reboot or shutdown
+no longer exist. A simple script named "post_install_reboot" is included in the
+runit-for-slackware build directory to safely halt the system and perform a low-level
+reboot. To run this script, log out of X Windows to a tty console prompt, and as
+root...
+
+   NOTE: Skip this section if the installations were done in a chroot
+   environment. Instead, exit chroot, unmount the virtual kernel file
+   systems, and reboot the host system in its usual way.
+
+post_install_reboot
+
+
+What Now?
+---------
+Hopefully your system successfully reboots like it did before. Console
+messaging content and appearance will be different, but it should boot as normal.
